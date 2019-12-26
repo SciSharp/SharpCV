@@ -1,6 +1,7 @@
 ﻿using NumSharp;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -35,6 +36,31 @@ namespace SharpCV
                 fx, 
                 fy, 
                 (int)interpolation);
+            return dst;
+        }
+
+        /// <summary>
+        /// Using rotation matrix to rotate a image.
+        /// https://en.wikipedia.org/wiki/Rotation_matrix
+        /// </summary>
+        /// <param name="img"></param>
+        /// <param name="center"></param>
+        /// <param name="angle"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public Mat rotate(Mat img, 
+            (int, int) center, 
+            double angle, 
+            double scale, 
+            InterpolationFlags flags = InterpolationFlags.INTER_LINEAR,
+            BorderTypes borderMode = BorderTypes.BORDER_CONSTANT)
+        {
+            cv2_native_api.imgproc_getRotationMatrix2D(new Point(center.Item1, center.Item2), angle, scale, out var handle);
+            var matrix2d = new Mat(handle);
+            cv2_native_api.core_Mat_size(img, out var size);
+            var scalar = new Scalar();
+            var dst = new Mat();
+            cv2_native_api.imgproc_warpAffine(img.InputArray, dst.OutputArray, matrix2d.InputArray, size, (int)flags, (int)borderMode, scalar);
             return dst;
         }
     }

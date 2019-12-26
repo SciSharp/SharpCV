@@ -25,6 +25,26 @@ namespace SharpCV
         IMREAD_IGNORE_ORIENTATION = 128 //!< If set, do not rotate the image according to EXIF's orientation flag.
     }
 
+    /// <summary>
+    /// modules\core\include\opencv2\core\base.hpp
+    /// </summary>
+    public enum BorderTypes
+    {
+        BORDER_CONSTANT = 0, //!< `iiiiii|abcdefgh|iiiiiii`  with some specified `i`
+        BORDER_REPLICATE = 1, //!< `aaaaaa|abcdefgh|hhhhhhh`
+        BORDER_REFLECT = 2, //!< `fedcba|abcdefgh|hgfedcb`
+        BORDER_WRAP = 3, //!< `cdefgh|abcdefgh|abcdefg`
+        BORDER_REFLECT_101 = 4, //!< `gfedcb|abcdefgh|gfedcba`
+        BORDER_TRANSPARENT = 5, //!< `uvwxyz|abcdefgh|ijklmno`
+
+        BORDER_REFLECT101 = BORDER_REFLECT_101, //!< same as BORDER_REFLECT_101
+        BORDER_DEFAULT = BORDER_REFLECT_101, //!< same as BORDER_REFLECT_101
+        BORDER_ISOLATED = 16 //!< do not look outside of ROI
+    };
+
+    /// <summary>
+    /// modules\imgproc\include\opencv2\imgproc.hpp
+    /// </summary>
     public enum ThresholdTypes
     {
         THRESH_BINARY = 0, //!< \f[\texttt{dst} (x,y) =  \fork{\texttt{maxval}}{if \(\texttt{src}(x,y) > \texttt{thresh}\)}{0}{otherwise}\f]
@@ -306,6 +326,16 @@ namespace SharpCV
         COLOR_BayerGR2RGBA = COLOR_BayerGB2BGRA,
 
         COLOR_COLORCVT_MAX = 143
+    };
+
+    /// <summary>
+    /// modules\core\include\opencv2\core.hpp
+    /// </summary>
+    public enum RotateFlags
+    {
+        ROTATE_90_CLOCKWISE = 0, //!<Rotate 90 degrees clockwise
+        ROTATE_180 = 1, //!<Rotate 180 degrees clockwise
+        ROTATE_90_COUNTERCLOCKWISE = 2, //!<Rotate 270 degrees clockwise
     };
 
     /// <summary>

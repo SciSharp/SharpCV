@@ -11,7 +11,7 @@ namespace UnitTest
         public void imshow()
         {
             var img = cv2.imread(imgSolar);
-            cv2.imshow("solar", img);
+            // cv2.imshow("solar", img);
             // cv2.waitKey(0);
         }
     }
