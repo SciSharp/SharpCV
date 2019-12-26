@@ -1,6 +1,6 @@
 # SharpCV
 
-A image library combines [OpenCV](https://github.com/opencv/opencv) and [NumSharp](https://github.com/SciSharp/NumSharp) together.
+A image library combines [OpenCV](https://github.com/opencv/opencv) and [NumSharp](https://github.com/SciSharp/NumSharp) together. `SharpCV` returns `Mat` object with `NDArray` supported, which makes it easier to do data manipulation like slicing.
 
 [![Join the chat at https://gitter.im/publiclab/publiclab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sci-sharp/community) [![NuGet](https://img.shields.io/nuget/dt/SharpCV.svg)](https://www.nuget.org/packages/SharpCV)
 
@@ -10,6 +10,7 @@ Install OpenCV prebuild binary
 
 ```powershell
 PM> Install-Package OpenCvSharp4.runtime.win
+PM> Install-Package SharpCV
 ```
 
 ```csharp

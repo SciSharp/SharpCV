@@ -56,6 +56,7 @@ namespace SharpCV
         public Mat(IntPtr handle)
         {
             _handle = handle;
+            _nd = WrapWithNDArray();
         }
 
         //this method copies Mat to a new NDArray
