@@ -1,2 +1,23 @@
 # SharpCV
-A image library combines OpenCV and NumSharp together.
+
+A image library combines [OpenCV](https://github.com/opencv/opencv) and [NumSharp](https://github.com/SciSharp/NumSharp) together.
+
+### How to use
+
+Install OpenCV prebuild binary
+
+```powershell
+PM> Install-Package OpenCvSharp4.runtime.win
+```
+
+```csharp
+using static SharpCV.Binding;
+
+// convert to black-white image
+var img = cv2.imread("solar.jpg");
+var gray = cv2.cvtColor(img, ColorConversionCodes.COLOR_RGB2GRAY);
+var (ret, binary) = cv2.threshold(gray, 0, 255, ThresholdTypes.THRESH_BINARY | ThresholdTypes.THRESH_TRIANGLE);
+cv2.imshow("black-white", binary);
+cv2.waitKey(0);
+```
+
