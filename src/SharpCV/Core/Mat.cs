@@ -95,6 +95,9 @@ namespace SharpCV
             var p = ptr;
         }
 
+        public NDArray astype(Type type)
+            => data.astype(type);
+
         protected override void FreeHandle()
         {
             cv2_native_api.core_Mat_delete(_handle);
@@ -105,5 +108,8 @@ namespace SharpCV
 
         public static implicit operator Mat(IntPtr handle)
             => new Mat(handle);
+
+        public static implicit operator NDArray(Mat mat)
+            => mat.data;
     }
 }
