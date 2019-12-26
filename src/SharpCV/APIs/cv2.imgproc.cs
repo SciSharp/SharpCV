@@ -21,5 +21,21 @@ namespace SharpCV
             cv2_native_api.imgproc_threshold(img.InputArray, dst.OutputArray, thresh, maxval, (int)type, out var ret);
             return (ret, dst);
         }
+
+        public Mat resize(Mat img, 
+            (int, int) dsize, 
+            double fx = 0, 
+            double fy = 0, 
+            InterpolationFlags interpolation = InterpolationFlags.INTER_LINEAR)
+        {
+            var dst = new Mat();
+            cv2_native_api.imgproc_resize(img.InputArray, 
+                dst.OutputArray, 
+                new Size(dsize.Item1, dsize.Item2), 
+                fx, 
+                fy, 
+                (int)interpolation);
+            return dst;
+        }
     }
 }
