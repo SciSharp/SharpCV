@@ -25,6 +25,26 @@ namespace SharpCV
         IMREAD_IGNORE_ORIENTATION = 128 //!< If set, do not rotate the image according to EXIF's orientation flag.
     }
 
+    /// <summary>
+    /// modules\core\include\opencv2\core\base.hpp
+    /// </summary>
+    public enum BorderTypes
+    {
+        BORDER_CONSTANT = 0, //!< `iiiiii|abcdefgh|iiiiiii`  with some specified `i`
+        BORDER_REPLICATE = 1, //!< `aaaaaa|abcdefgh|hhhhhhh`
+        BORDER_REFLECT = 2, //!< `fedcba|abcdefgh|hgfedcb`
+        BORDER_WRAP = 3, //!< `cdefgh|abcdefgh|abcdefg`
+        BORDER_REFLECT_101 = 4, //!< `gfedcb|abcdefgh|gfedcba`
+        BORDER_TRANSPARENT = 5, //!< `uvwxyz|abcdefgh|ijklmno`
+
+        BORDER_REFLECT101 = BORDER_REFLECT_101, //!< same as BORDER_REFLECT_101
+        BORDER_DEFAULT = BORDER_REFLECT_101, //!< same as BORDER_REFLECT_101
+        BORDER_ISOLATED = 16 //!< do not look outside of ROI
+    };
+
+    /// <summary>
+    /// modules\imgproc\include\opencv2\imgproc.hpp
+    /// </summary>
     public enum ThresholdTypes
     {
         THRESH_BINARY = 0, //!< \f[\texttt{dst} (x,y) =  \fork{\texttt{maxval}}{if \(\texttt{src}(x,y) > \texttt{thresh}\)}{0}{otherwise}\f]
@@ -306,5 +326,48 @@ namespace SharpCV
         COLOR_BayerGR2RGBA = COLOR_BayerGB2BGRA,
 
         COLOR_COLORCVT_MAX = 143
+    };
+
+    /// <summary>
+    /// modules\core\include\opencv2\core.hpp
+    /// </summary>
+    public enum RotateFlags
+    {
+        ROTATE_90_CLOCKWISE = 0, //!<Rotate 90 degrees clockwise
+        ROTATE_180 = 1, //!<Rotate 180 degrees clockwise
+        ROTATE_90_COUNTERCLOCKWISE = 2, //!<Rotate 270 degrees clockwise
+    };
+
+    /// <summary>
+    /// modules\imgproc\include\opencv2\imgproc.hpp
+    /// </summary>
+    public enum InterpolationFlags
+    {
+        /** nearest neighbor interpolation */
+        INTER_NEAREST = 0,
+        /** bilinear interpolation */
+        INTER_LINEAR = 1,
+        /** bicubic interpolation */
+        INTER_CUBIC = 2,
+        /** resampling using pixel area relation. It may be a preferred method for image decimation, as
+        it gives moire'-free results. But when the image is zoomed, it is similar to the INTER_NEAREST
+        method. */
+        INTER_AREA = 3,
+        /** Lanczos interpolation over 8x8 neighborhood */
+        INTER_LANCZOS4 = 4,
+        /** Bit exact bilinear interpolation */
+        INTER_LINEAR_EXACT = 5,
+        /** mask for interpolation codes */
+        INTER_MAX = 7,
+        /** flag, fills all of the destination image pixels. If some of them correspond to outliers in the
+        source image, they are set to zero */
+        WARP_FILL_OUTLIERS = 8,
+        /** flag, inverse transformation
+
+        For example, #linearPolar or #logPolar transforms:
+        - flag is __not__ set: \f$dst( \rho , \phi ) = src(x,y)\f$
+        - flag is set: \f$dst(x,y) = src( \rho , \phi )\f$
+        */
+        WARP_INVERSE_MAP = 16
     };
 }
