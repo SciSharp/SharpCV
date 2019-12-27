@@ -9,10 +9,30 @@ namespace SharpCV
 {
     public partial class cv_api
     {
-        public Mat cvtColor(Mat img, ColorConversionCodes code, int dstCnt = 0)
+        public Mat cvtColor(Mat img, 
+            ColorConversionCodes code, 
+            int dstCnt = 0)
         {
             var dst = new Mat();
             cv2_native_api.imgproc_cvtColor(img.InputArray, dst.OutputArray, (int)code, dstCnt);
+            return dst;
+        }
+
+        public Mat adaptiveThreshold(Mat img, 
+            double maxValue, 
+            AdaptiveThresholdTypes method, 
+            ThresholdTypes type, 
+            int blockSize, 
+            double delta)
+        {
+            var dst = new Mat();
+            cv2_native_api.imgproc_adaptiveThreshold(img.InputArray, 
+                dst.OutputArray, 
+                maxValue,
+                (int)method,
+                (int)type,
+                blockSize,
+                delta);
             return dst;
         }
 

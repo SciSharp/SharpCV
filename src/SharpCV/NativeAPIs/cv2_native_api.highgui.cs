@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharpCV
 {
-    public partial class cv2_native_api
+    internal partial class cv2_native_api
     {
         [DllImport(OpenCvDllName)]
         internal static extern void highgui_imshow(string winName, IntPtr mat);

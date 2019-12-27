@@ -29,6 +29,15 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void adaptiveThreshold()
+        {
+            var img = cv2.imread(imgSolar);
+            var gray = cv2.cvtColor(img, ColorConversionCodes.COLOR_RGB2GRAY);
+            var binary = cv2.adaptiveThreshold(gray, 255, AdaptiveThresholdTypes.ADAPTIVE_THRESH_GAUSSIAN_C, ThresholdTypes.THRESH_BINARY, 25, 10);
+            Assert.AreEqual(299300, binary.size);
+        }
+
+        [TestMethod]
         public void resize()
         {
             var img = cv2.imread(imgSolar);
