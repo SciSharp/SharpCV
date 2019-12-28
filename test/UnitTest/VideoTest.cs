@@ -26,5 +26,19 @@ namespace UnitTest
             Assert.AreEqual(1280, lastFrame.shape[1]);
             Assert.AreEqual(3, lastFrame.shape[2]);
         }
+
+        [Ignore]
+        [TestMethod]
+        public void VideoCaptureFromCamera()
+        {
+            var vid = cv2.VideoCapture(0);
+            var (loaded, frame) = vid.read();
+            while (loaded)
+            {
+                (loaded, frame) = vid.read();
+                cv2.imshow("camera capture", frame);
+                cv2.waitKey(100);
+            }
+        }
     }
 }

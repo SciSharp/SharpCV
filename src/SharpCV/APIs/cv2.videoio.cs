@@ -8,6 +8,12 @@ namespace SharpCV
 {
     public partial class cv_api
     {
+        public VideoCapture VideoCapture(int device, VideoCaptureAPIs api = VideoCaptureAPIs.CAP_ANY)
+        {
+            cv2_native_api.videoio_VideoCapture_new3(device, (int)api, out var handle);
+            return new VideoCapture(handle);
+        }
+
         public VideoCapture VideoCapture(string fileName, VideoCaptureAPIs api = VideoCaptureAPIs.CAP_ANY)
         {
             cv2_native_api.videoio_VideoCapture_new2(fileName, (int)api, out var handle);
