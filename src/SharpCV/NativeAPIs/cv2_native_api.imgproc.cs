@@ -20,5 +20,11 @@ namespace SharpCV
         internal static extern void imgproc_warpAffine(IntPtr src, IntPtr dst, IntPtr m, Size dsize, int flags, int borderMode, Scalar borderValue);
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_adaptiveThreshold(IntPtr src, IntPtr dst, double maxValue, int method, int type, int blockSize, double delta);
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_pyrUp(IntPtr src, IntPtr dst, Size dstsize, int borderType);
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_pyrDown(IntPtr src, IntPtr dst, Size dstsize, int borderType);
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_calcBackProject(IntPtr[] images, int nimages, int[] channels, IntPtr hist, IntPtr backProject, IntPtr[] ranges, int uniform);
     }
 }

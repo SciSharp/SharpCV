@@ -38,6 +38,20 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void pyrDown()
+        {
+            var img = cv2.imread(imgSolar);
+            var dst = cv2.pyrDown(img);
+        }
+
+        [TestMethod]
+        public void pyrUp()
+        {
+            var img = cv2.imread(imgSolar);
+            var dst = cv2.pyrUp(img);
+        }
+
+        [TestMethod]
         public void resize()
         {
             var img = cv2.imread(imgSolar);

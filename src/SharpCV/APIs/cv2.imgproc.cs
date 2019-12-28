@@ -43,6 +43,50 @@ namespace SharpCV
             return (ret, dst);
         }
 
+        public Mat pyrUp(Mat img)
+        {
+            var dst = new Mat();
+            cv2_native_api.imgproc_pyrUp(img.InputArray,
+                dst.OutputArray,
+                new Size(),
+                (int)BorderTypes.BORDER_DEFAULT);
+            return dst;
+        }
+
+        public Mat pyrUp(Mat img,
+            (int, int) dstSize,
+            BorderTypes borderType = BorderTypes.BORDER_DEFAULT)
+        {
+            var dst = new Mat();
+            cv2_native_api.imgproc_pyrUp(img.InputArray,
+                dst.OutputArray,
+                new Size(dstSize.Item1, dstSize.Item2),
+                (int)borderType);
+            return dst;
+        }
+
+        public Mat pyrDown(Mat img, 
+            (int, int) dstSize,
+            BorderTypes borderType = BorderTypes.BORDER_DEFAULT)
+        {
+            var dst = new Mat();
+            cv2_native_api.imgproc_pyrDown(img.InputArray, 
+                dst.OutputArray,
+                new Size(dstSize.Item1, dstSize.Item2), 
+                (int)borderType);
+            return dst;
+        }
+
+        public Mat pyrDown(Mat img)
+        {
+            var dst = new Mat();
+            cv2_native_api.imgproc_pyrDown(img.InputArray,
+                dst.OutputArray,
+                new Size(),
+                (int)BorderTypes.BORDER_DEFAULT);
+            return dst;
+        }
+
         public Mat resize(Mat img, 
             (int, int) dsize, 
             double fx = 0, 
@@ -56,6 +100,7 @@ namespace SharpCV
                 fx, 
                 fy, 
                 (int)interpolation);
+
             return dst;
         }
 
@@ -75,12 +120,24 @@ namespace SharpCV
             InterpolationFlags flags = InterpolationFlags.INTER_LINEAR,
             BorderTypes borderMode = BorderTypes.BORDER_CONSTANT)
         {
-            cv2_native_api.imgproc_getRotationMatrix2D(new Point(center.Item1, center.Item2), angle, scale, out var handle);
-            var matrix2d = new Mat(handle);
+            cv2_native_api.imgproc_getRotationMatrix2D(new Point(center.Item1, center.Item2), 
+                angle, 
+                scale, 
+                out var handle);
+            
             cv2_native_api.core_Mat_size(img, out var size);
+
             var scalar = new Scalar();
             var dst = new Mat();
-            cv2_native_api.imgproc_warpAffine(img.InputArray, dst.OutputArray, matrix2d.InputArray, size, (int)flags, (int)borderMode, scalar);
+            var matrix2d = new Mat(handle);
+
+            cv2_native_api.imgproc_warpAffine(img.InputArray, 
+                dst.OutputArray, 
+                matrix2d.InputArray, 
+                size, 
+                (int)flags, 
+                (int)borderMode, scalar);
+
             return dst;
         }
     }

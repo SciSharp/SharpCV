@@ -23,6 +23,9 @@ namespace SharpCV
         }
 
         public Type dtype => data.dtype;
+        /// <summary>
+        /// HWC
+        /// </summary>
         public Shape shape => data.Shape;
         public int size => data.size;
 

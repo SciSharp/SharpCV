@@ -10,17 +10,17 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_new1(out IntPtr returnValue);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_Mat_cols(IntPtr self, out int output);
+        internal static extern void core_Mat_cols(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_Mat_rows(IntPtr self, out int output);
+        internal static extern void core_Mat_rows(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_Mat_type(IntPtr self, out int output);
+        internal static extern void core_Mat_type(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
-        internal static extern unsafe void core_Mat_data(IntPtr self, out byte* output);
+        internal static extern unsafe void core_Mat_data(IntPtr mat, out byte* output);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_Mat_channels(IntPtr self, out int output);
+        internal static extern void core_Mat_channels(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_Mat_delete(IntPtr prt);
+        internal static extern void core_Mat_delete(IntPtr mat);
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_size(IntPtr mat, out Size output);
         [DllImport(OpenCvDllName)]
@@ -28,6 +28,16 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void core_OutputArray_new_byMat(IntPtr mat, out IntPtr output);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_rotate(IntPtr src, IntPtr dst, int flags);
+        internal static extern void core_rotate(IntPtr mat, IntPtr dst, int flags);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_flip(IntPtr mat, IntPtr dst, int mode);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_hconcat1([MarshalAs(UnmanagedType.LPArray)] IntPtr[] src, uint nsrc, IntPtr dst);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_vconcat1([MarshalAs(UnmanagedType.LPArray)] IntPtr[] src, uint nsrc, IntPtr dst);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_hconcat2(IntPtr mat1, IntPtr mat2, IntPtr dst);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_vconcat2(IntPtr mat1, IntPtr mat2, IntPtr dst);
     }
 }

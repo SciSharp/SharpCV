@@ -11,6 +11,26 @@ namespace UnitTest
     public class CoreTest : Test
     {
         [TestMethod]
+        public void hconcat()
+        {
+            var img = cv2.imread(imgSolar);
+            var hconcated = cv2.hconcat(img, img);
+            Assert.AreEqual(410, hconcated.shape[0]);
+            Assert.AreEqual(1460, hconcated.shape[1]);
+            Assert.AreEqual(3, hconcated.shape[2]);
+        }
+
+        [TestMethod]
+        public void vconcat()
+        {
+            var img = cv2.imread(imgSolar);
+            var hconcated = cv2.vconcat(img, img);
+            Assert.AreEqual(820, hconcated.shape[0]);
+            Assert.AreEqual(730, hconcated.shape[1]);
+            Assert.AreEqual(3, hconcated.shape[2]);
+        }
+
+        [TestMethod]
         public void rotate()
         {
             var img = cv2.imread(imgSolar);
@@ -18,6 +38,16 @@ namespace UnitTest
             Assert.AreEqual(730, rotated.shape[0]);
             Assert.AreEqual(410, rotated.shape[1]);
             Assert.AreEqual(3, rotated.shape[2]);
+        }
+
+        [TestMethod]
+        public void flip()
+        {
+            var img = cv2.imread(imgSolar);
+            var flipped = cv2.flip(img, FLIP_MODE.FLIP_HORIZONTAL_MODE);
+            Assert.AreEqual(410, flipped.shape[0]);
+            Assert.AreEqual(730, flipped.shape[1]);
+            Assert.AreEqual(3, flipped.shape[2]);
         }
     }
 }
