@@ -6,9 +6,21 @@ namespace SharpCV
 {
     public class Dnn
     {
-        public Net readNetFromTensorFlow(string model, string config = null)
+        public Net readNetFromTensorflow(string model, string config = null)
         {
             cv2_native_api.dnn_readNetFromTensorflow(model, config, out var handle);
+            return new Net(handle);
+        }
+
+        public Net ReadNetFromTorch(string model, bool isBinary = true)
+        {
+            cv2_native_api.dnn_readNetFromTorch(model, isBinary, out var handle);
+            return new Net(handle);
+        }
+
+        public Net ReadNetFromONNX(string model)
+        {
+            cv2_native_api.dnn_readNetFromONNX(model, out var handle);
             return new Net(handle);
         }
 
