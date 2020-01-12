@@ -22,7 +22,9 @@ namespace SharpCV
             }
         }
 
-        public Type dtype => data.dtype;
+        NPTypeCode _type = NPTypeCode.Byte;
+        public NPTypeCode dtype => _type;
+
         /// <summary>
         /// HWC
         /// </summary>
@@ -51,15 +53,17 @@ namespace SharpCV
             }
         }
 
-        public Mat()
+        public Mat(NPTypeCode type = NPTypeCode.Byte)
         {
             cv2_native_api.core_Mat_new1(out _handle);
+            _type = type;
         }
 
-        public Mat(IntPtr handle)
+        public Mat(IntPtr handle, NPTypeCode type = NPTypeCode.Byte)
         {
             _handle = handle;
-            _nd = WrapWithNDArray();
+            _type = type;
+            WrapWithNDArray();
         }
 
         //this method copies Mat to a new NDArray
@@ -68,7 +72,7 @@ namespace SharpCV
             cv2_native_api.core_Mat_cols(_handle, out var width);
             cv2_native_api.core_Mat_rows(_handle, out var height);
             cv2_native_api.core_Mat_type(_handle, out var type);
-            cv2_native_api.core_Mat_data(_handle, out var data);
+            cv2_native_api.core_Mat_data(_handle, out byte* data);
 
             var nd = new NDArray(NPTypeCode.Byte, (1, height, width, type), fillZeros: false);
             new UnmanagedMemoryBlock<byte>(data, nd.size)
@@ -83,13 +87,27 @@ namespace SharpCV
             cv2_native_api.core_Mat_cols(_handle, out var width);
             cv2_native_api.core_Mat_rows(_handle, out var height);
             cv2_native_api.core_Mat_channels(_handle, out var channels);
-            cv2_native_api.core_Mat_data(_handle, out var dataPtr);
 
             Shape shape = (height, width, channels);
+
             // we pass donothing as it keeps reference to src preventing its disposal by GC
-            var block = new UnmanagedMemoryBlock<byte>(dataPtr, shape.Size, () => DoNothing(_handle));
-            var storage = new UnmanagedStorage(new ArraySlice<byte>(block), shape); 
-            return new NDArray(storage);
+            switch (_type)
+            {
+                case NPTypeCode.Single:
+                    {
+                        cv2_native_api.core_Mat_data(_handle, out float* dataPtr);
+                        var block = new UnmanagedMemoryBlock<float>(dataPtr, shape.Size, () => DoNothing(_handle));
+                        var storage = new UnmanagedStorage(new ArraySlice<float>(block), shape);
+                        return new NDArray(storage);
+                    }
+                default:
+                    {
+                        cv2_native_api.core_Mat_data(_handle, out byte* dataPtr);
+                        var block = new UnmanagedMemoryBlock<byte>(dataPtr, shape.Size, () => DoNothing(_handle));
+                        var storage = new UnmanagedStorage(new ArraySlice<byte>(block), shape);
+                        return new NDArray(storage);
+                    }
+            }
         }
 
         [MethodImpl(MethodImplOptions.NoOptimization)]
