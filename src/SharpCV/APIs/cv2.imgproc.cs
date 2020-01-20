@@ -140,5 +140,22 @@ namespace SharpCV
 
             return dst;
         }
+
+        public void rectangle(Mat img, 
+            Point leftTop,
+            Point rightBottom, 
+            Scalar color, 
+            int thickness = 1, 
+            LineTypes type = LineTypes.LINE_8,
+            int shift = 0)
+        {
+            cv2_native_api.imgproc_rectangle_InputOutputArray(img.OutputArray,
+                leftTop,
+                rightBottom,
+                color,
+                thickness,
+                type,
+                shift);
+        }
     }
 }

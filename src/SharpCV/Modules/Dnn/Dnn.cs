@@ -34,7 +34,7 @@ namespace SharpCV
         /// <param name="swapRB">flag which indicates that swap first and last channels in 3-channel image is necessary.</param>
         /// <param name="crop">flag which indicates whether image will be cropped after resize or not</param>
         /// <returns></returns>
-        public Mat blobFromImage(Mat image, double scaleFactor, (int, int) size, Scalar? mean = null, bool swapRB = true, bool crop = true)
+        public Mat blobFromImage(Mat image, double scaleFactor, (int, int) size, Scalar? mean = null, bool swapRB = true, bool crop = false)
         {
             cv2_native_api.dnn_blobFromImage(image,
                 scaleFactor,
@@ -43,7 +43,7 @@ namespace SharpCV
                 swapRB, 
                 crop,
                 out var handle);
-            return new Mat(handle, type: NumSharp.NPTypeCode.Single);
+            return new Mat(handle);
         }
     }
 }

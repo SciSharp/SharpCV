@@ -24,7 +24,7 @@ namespace SharpCV
         public Mat forward(string outputName = "")
         {
             cv2_native_api.dnn_Net_forward1(_handle, outputName, out var handle);
-            return new Mat(handle, NumSharp.NPTypeCode.Float);
+            return new Mat(handle);
         }
 
         protected override void FreeHandle()

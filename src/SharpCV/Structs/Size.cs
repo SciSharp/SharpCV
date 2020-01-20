@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SharpCV
 {
-    internal struct Size
+    public struct Size
     {
         public int Width { get; }
         public int Height { get; }

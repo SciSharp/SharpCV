@@ -26,5 +26,7 @@ namespace SharpCV
         internal static extern void imgproc_pyrDown(IntPtr src, IntPtr dst, Size dstsize, int borderType);
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_calcBackProject(IntPtr[] images, int nimages, int[] channels, IntPtr hist, IntPtr backProject, IntPtr[] ranges, int uniform);
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_rectangle_InputOutputArray(IntPtr img, Point pt1, Point pt2, Scalar color, int thickness, LineTypes lineType, int shift);
     }
 }

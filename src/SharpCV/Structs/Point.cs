@@ -4,15 +4,27 @@ using System.Text;
 
 namespace SharpCV
 {
-    internal struct Point
+    public struct Point
     {
-        public float X { get; }
-        public float Y { get; }
+        public int X { get; }
+        public int Y { get; }
 
-        public Point(float width, float height)
+        public Point(int width, int height)
         {
             X = width;
             Y = height;
         }
+
+        public Point(float width, float height)
+        {
+            X = Convert.ToInt32(width);
+            Y = Convert.ToInt32(height);
+        }
+
+        public static implicit operator Point((float, float) vals)
+            => new Point(vals.Item1, vals.Item2);
+
+        public static implicit operator Point((int, int) vals)
+            => new Point(vals.Item1, vals.Item2);
     }
 }

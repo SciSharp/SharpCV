@@ -17,19 +17,63 @@ namespace SharpCV
             get
             {
                 if (_nd is null)
-                    _nd = WrapWithNDArray();
+                    _nd = GetData();
+
                 return _nd;
             }
         }
 
-        NPTypeCode _type = NPTypeCode.Byte;
-        public NPTypeCode dtype => _type;
+        int _ndim;
+        public int ndim
+        {
+            get
+            {
+                cv2_native_api.core_Mat_dims(_handle, out _ndim);
+                return _ndim;
+            }
+        }
 
+        public NPTypeCode dtype { get; set; } = NPTypeCode.Byte;
+
+        MatType _matType = MatType.Unknown;
+        public MatType MatType
+        {
+            get
+            {
+                if (_matType != MatType.Unknown)
+                    return _matType;
+
+                cv2_native_api.core_Mat_type(_handle, out _matType);
+                return _matType;
+            }
+        }
+
+        int[] _dims;
+        Shape _shape;
         /// <summary>
         /// HWC
+        /// height * width * channel
         /// </summary>
-        public Shape shape => data.Shape;
-        public int size => data.size;
+        public Shape shape
+        {
+            get
+            {
+                if(_dims != null)
+                    return _shape;
+
+                _dims = new int[ndim + (Channels > 1 ? 1 : 0)];
+                for (int i = 0; i < ndim; i++)
+                    cv2_native_api.core_Mat_sizeAt(_handle, i, out _dims[i]);
+
+                if(Channels > 1)
+                    _dims[ndim] = Channels;
+
+                _shape = new Shape(_dims);
+                return _shape;
+            }
+        }
+
+        public int size => shape.Size;
 
         IntPtr _intputArray;
         public IntPtr InputArray
@@ -53,17 +97,52 @@ namespace SharpCV
             }
         }
 
-        public Mat(NPTypeCode type = NPTypeCode.Byte)
+        int _channels = -1;
+        public int Channels
         {
-            cv2_native_api.core_Mat_new1(out _handle);
-            _type = type;
+            get
+            {
+                if (_channels > -1)
+                    return _channels;
+
+                cv2_native_api.core_Mat_channels(_handle, out _channels);
+                return _channels;
+            }
         }
 
-        public Mat(IntPtr handle, NPTypeCode type = NPTypeCode.Byte)
+        public Mat()
+        {
+            cv2_native_api.core_Mat_new1(out _handle);
+        }
+
+        public Mat(IntPtr handle)
         {
             _handle = handle;
-            _type = type;
-            WrapWithNDArray();
+        }
+
+        public unsafe NDArray GetData()
+        {
+            // we pass donothing as it keeps reference to src preventing its disposal by GC
+            switch (MatType)
+            {
+                case MatType.CV_32FC1:
+                    {
+                        cv2_native_api.core_Mat_data(_handle, out float* dataPtr);
+                        var block = new UnmanagedMemoryBlock<float>(dataPtr, shape.Size, () => DoNothing(_handle));
+                        var storage = new UnmanagedStorage(new ArraySlice<float>(block), shape);
+                        return new NDArray(storage);
+                    }
+                case MatType.CV_8UC1:
+                case MatType.CV_8UC3:
+                    {
+                        cv2_native_api.core_Mat_data(_handle, out byte* dataPtr);
+                        var block = new UnmanagedMemoryBlock<byte>(dataPtr, size, () => DoNothing(_handle));
+                        var storage = new UnmanagedStorage(new ArraySlice<byte>(block), shape);
+                        return new NDArray(storage);
+                    }
+                default:
+                    throw new NotImplementedException($"Can't find type: {_matType}");
+            }
         }
 
         //this method copies Mat to a new NDArray
@@ -71,14 +150,14 @@ namespace SharpCV
         {
             cv2_native_api.core_Mat_cols(_handle, out var width);
             cv2_native_api.core_Mat_rows(_handle, out var height);
-            cv2_native_api.core_Mat_type(_handle, out var type);
             cv2_native_api.core_Mat_data(_handle, out byte* data);
 
-            var nd = new NDArray(NPTypeCode.Byte, (1, height, width, type), fillZeros: false);
+            /*var nd = new NDArray(NPTypeCode.Byte, (1, height, width, type), fillZeros: false);
             new UnmanagedMemoryBlock<byte>(data, nd.size)
                 .CopyTo(nd.Unsafe.Address);
 
-            return nd;
+            return nd;*/
+            return new NDArray(NPTypeCode.Byte);
         }
 
         //this method wraps without copying Mat.
@@ -91,7 +170,7 @@ namespace SharpCV
             Shape shape = (height, width, channels);
 
             // we pass donothing as it keeps reference to src preventing its disposal by GC
-            switch (_type)
+            switch (dtype)
             {
                 case NPTypeCode.Single:
                     {

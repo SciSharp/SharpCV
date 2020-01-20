@@ -14,7 +14,11 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_rows(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_Mat_type(IntPtr mat, out int output);
+        internal static extern void core_Mat_dims(IntPtr mat, out int output);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_Mat_sizeAt(IntPtr mat, int dim, out int output);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_Mat_type(IntPtr mat, out MatType output);
         [DllImport(OpenCvDllName)]
         internal static extern unsafe void core_Mat_data(IntPtr mat, out byte* output);
         [DllImport(OpenCvDllName)]
@@ -22,9 +26,13 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_channels(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
+        internal static extern void core_Mat_depth(IntPtr mat, out int output);
+        [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_delete(IntPtr mat);
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_size(IntPtr mat, out Size output);
+        [DllImport(OpenCvDllName)]
+        internal static extern void core_Mat_elemSize(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
         internal static extern void core_InputArray_new_byMat(IntPtr mat, out IntPtr output);
         [DllImport(OpenCvDllName)]

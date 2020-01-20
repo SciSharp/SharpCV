@@ -36,3 +36,5 @@ while (loaded)
 }
 ```
 
+If you want to learn more about the API implementation, please refer to the official [documentation](https://docs.opencv.org/).
+

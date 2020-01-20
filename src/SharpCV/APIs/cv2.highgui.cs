@@ -23,7 +23,7 @@ namespace SharpCV
             cv2_native_api.highgui_resizeWindow(name, width, height);
         }
 
-        public void waitKey(int delay)
+        public void waitKey(int delay = 0)
         {
             cv2_native_api.highgui_waitKey(delay, out var output);
         }
