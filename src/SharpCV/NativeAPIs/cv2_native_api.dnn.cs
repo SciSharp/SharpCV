@@ -8,6 +8,8 @@ namespace SharpCV
     internal partial class cv2_native_api
     {
         [DllImport(OpenCvDllName)]
+        internal static extern void dnn_readNetFromDarknet(string cfgFile, string darknetModel, out IntPtr returnValue);
+        [DllImport(OpenCvDllName)]
         internal static extern void dnn_Net_new(out IntPtr net);
         [DllImport(OpenCvDllName)]
         internal static extern void dnn_readNetFromTensorflow(string model, string config, out IntPtr output);

@@ -28,5 +28,13 @@ namespace SharpCV
         internal static extern void imgproc_calcBackProject(IntPtr[] images, int nimages, int[] channels, IntPtr hist, IntPtr backProject, IntPtr[] ranges, int uniform);
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_rectangle_InputOutputArray(IntPtr img, Point pt1, Point pt2, Scalar color, int thickness, LineTypes lineType, int shift);
+
+        [DllImport(OpenCvDllName, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        public static extern void imgproc_putText(IntPtr img, string text, Point org,
+            int fontFace, double fontScale, Scalar color,
+            int thickness, int lineType, int bottomLeftOrigin);
+        [DllImport(OpenCvDllName, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        internal static extern void imgproc_getTextSize(string text, int fontFace,
+            double fontScale, int thickness, out int baseLine, out Size returnValue);
     }
 }
