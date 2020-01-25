@@ -157,6 +157,7 @@ namespace SharpCV
                 type,
                 shift);
         }
+
         public void putText(Mat img, string text, Point org,
             HersheyFonts fontFace, double fontScale, Scalar color,
             int thickness = 1, LineTypes lineType = LineTypes.LINE_8, bool bottomLeftOrigin = false)

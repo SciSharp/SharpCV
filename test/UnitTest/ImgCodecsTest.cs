@@ -23,13 +23,15 @@ namespace UnitTest
             Assert.IsTrue(result);
         }
 
-        [Ignore]
         [TestMethod]
         public void imcrop()
         {
             var img = cv2.imread(imgSolar);
-            var cropped = cv2.imcrop(img, (1, 3), (1, 3));
-            cv2.imwrite("cropped.jpg", cropped);
+            var cropped1 = cv2.imcrop(img, (150, 50, 200, 350));
+            Assert.AreEqual((350, 200, 3), cropped1.shape);
+
+            var cropped2 = img[(50, 400), (150, 350)];
+            Assert.AreEqual((350, 200, 3), cropped2.shape);
         }
     }
 }

@@ -20,9 +20,10 @@ namespace SharpCV
             return output != 0;
         }
 
-        public Mat imcrop(Mat src, (int, int) y, (int, int) x)
+        public Mat imcrop(Mat src, Rect rect)
         {
-            return src[y, x];
+            cv2_native_api.core_Mat_new7(src, rect, out var handle);
+            return new Mat(handle);
         }
     }
 }

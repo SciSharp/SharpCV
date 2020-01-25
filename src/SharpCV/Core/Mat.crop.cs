@@ -11,12 +11,13 @@ namespace SharpCV
 {
     public partial class Mat
     {
-        public Mat this[(int, int) y, (int, int) x]
+        public unsafe Mat this[(int, int) y, (int, int) x]
         {
             get
             {
-                var cropped = _nd[$"{y.Item1}:{y.Item2}", $"{x.Item1}:{x.Item2}"];
-                cv2_native_api.imgcodecs_imdecode_vector(cropped.GetData<byte>().ToArray(), cropped.size, IMREAD_COLOR.IMREAD_COLOR, out var handle);
+                // var cropped = data[new Slice(y.Item1, y.Item2), new Slice(x.Item1, x.Item2)];
+                 cv2_native_api.core_Mat_new7(_handle, new Rect(x.Item1, y.Item1, x.Item2 - x.Item1, y.Item2 - y.Item1), out var handle);
+                // cv2_native_api.imgcodecs_imdecode_vector(cropped.GetData<byte>().ToArray(), cropped.size, IMREAD_COLOR.IMREAD_COLOR, out var handle);
                 return new Mat(handle);
             }
         }

@@ -72,5 +72,13 @@ namespace UnitTest
             Assert.AreEqual(730, rotated.shape[1]);
             Assert.AreEqual(3, rotated.shape[2]);
         }
+
+        [TestMethod]
+        public void rectangle()
+        {
+            var img = cv2.imread(imgSolar);
+            cv2.rectangle(img, (0, 0), (img.shape[1] / 2, img.shape[0] / 2), (255, 0, 0));
+            cv2.imwrite("rectangle.jpg", img);
+        }
     }
 }
