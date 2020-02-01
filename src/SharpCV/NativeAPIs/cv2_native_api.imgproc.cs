@@ -33,8 +33,26 @@ namespace SharpCV
         public static extern void imgproc_putText(IntPtr img, string text, Point org,
             int fontFace, double fontScale, Scalar color,
             int thickness, int lineType, int bottomLeftOrigin);
+
         [DllImport(OpenCvDllName, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         internal static extern void imgproc_getTextSize(string text, int fontFace,
             double fontScale, int thickness, out int baseLine, out Size returnValue);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_getStructuringElement(int shape, Size ksize, Point anchor, out IntPtr output);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_morphologyEx(IntPtr src, IntPtr dst, int op, IntPtr kernel, Point anchor,
+            int iterations, int borderType, Scalar borderValue);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_findContours1_vector(IntPtr image, out IntPtr contours,
+            out IntPtr hierarchy, int mode, int method, Point offset);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_drawContours_vector(IntPtr image,
+            IntPtr[] contours, int contoursSize1, int[] contoursSize2,
+            int contourIdx, Scalar color, int thickness, int lineType,
+            IntPtr hierarchy, int hiearchyLength, int maxLevel, Point offset);
     }
 }

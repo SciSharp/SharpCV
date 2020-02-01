@@ -22,5 +22,13 @@ namespace SharpCV
 
         public static implicit operator Rect((int, int, int, int) vals)
             => new Rect(vals.Item1, vals.Item2, vals.Item3, vals.Item4);
+
+        public void Deconstruct(out int x, out int y, out int width, out int height)
+        {
+            x = X;
+            y = Y;
+            width = Width;
+            height = Height;
+        }
     }
 }

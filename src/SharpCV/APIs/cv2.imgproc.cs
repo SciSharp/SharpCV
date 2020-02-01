@@ -1,6 +1,7 @@
 ﻿using NumSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -185,6 +186,68 @@ namespace SharpCV
         public Size getTextSize(string text, HersheyFonts fontFace, double fontScale, int thickness)
         {
             return getTextSize(text, fontFace, fontScale, thickness, out _);
+        }
+
+        public Mat getStructuringElement(MorphShapes shape, Size ksize)
+        {
+            cv2_native_api.imgproc_getStructuringElement((int)shape, ksize, new Point(), out var handle);
+            return new Mat(handle);
+        }
+
+        public Mat morphologyEx(Mat src, 
+            MorphTypes type, 
+            Mat kernel, 
+            Point anchor = default,
+            int iterations = 1,
+            BorderTypes borderType = BorderTypes.BORDER_CONSTANT,
+            Scalar borderValue =  default)
+        {
+            var output = new Mat();
+            cv2_native_api.imgproc_morphologyEx(src.InputArray, 
+                output.OutputArray, 
+                (int)type, 
+                kernel.InputArray,
+                anchor, 
+                iterations,
+                (int)borderType,
+                borderValue);
+            return output;
+        }
+
+        public (Point[][], IntPtr) findContours(Mat src, 
+            RetrievalModes mode, 
+            ContourApproximationModes method,
+            Point offset = default)
+        {
+            cv2_native_api.imgproc_findContours1_vector(src.OutputArray, 
+                out var contoursPtr, 
+                out var hierarchyPtr,
+                (int)mode,
+                (int)method,
+                offset);
+
+            using (var contoursVec = new VectorOfVectorPoint(contoursPtr))
+                return (contoursVec.ToArray(), hierarchyPtr);
+        }
+
+        public void drawContours(Mat image, 
+            Point[][] contours,
+            int contourIdx,
+            Scalar color,
+            int thickness = 1,
+            LineTypes lineType = LineTypes.LINE_8,
+            int maxLevel = int.MaxValue,
+            Point offset = default)
+        {
+            var contourSize2 = contours.Select(pts => pts.Length).ToArray();
+            using (var contoursPtr = new ArrayAddress2<Point>(contours))
+            {
+                cv2_native_api.imgproc_drawContours_vector(
+                            image.OutputArray, contoursPtr.Pointer, contours.Length, contourSize2,
+                            contourIdx, color, thickness, (int)lineType, IntPtr.Zero, 0, maxLevel, offset);
+            }
+
+            GC.KeepAlive(image);
         }
     }
 }

@@ -211,5 +211,10 @@ namespace SharpCV
 
         public static implicit operator NDArray(Mat mat)
             => mat.data;
+
+        public override string ToString()
+        {
+            return $"{shape.ToString()} {MatType}";
+        }
     }
 }

@@ -9,16 +9,16 @@ namespace SharpCV
         public int X { get; }
         public int Y { get; }
 
-        public Point(int width, int height)
+        public Point(int x, int y)
         {
-            X = width;
-            Y = height;
+            X = x;
+            Y = y;
         }
 
-        public Point(float width, float height)
+        public Point(float x, float y)
         {
-            X = Convert.ToInt32(width);
-            Y = Convert.ToInt32(height);
+            X = Convert.ToInt32(x);
+            Y = Convert.ToInt32(y);
         }
 
         public static implicit operator Point((float, float) vals)
@@ -26,5 +26,10 @@ namespace SharpCV
 
         public static implicit operator Point((int, int) vals)
             => new Point(vals.Item1, vals.Item2);
+
+        public override string ToString()
+        {
+            return $"{X}x{Y}";
+        }
     }
 }

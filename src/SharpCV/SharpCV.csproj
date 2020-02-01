@@ -18,8 +18,7 @@
     <AssemblyVersion>0.3.1.0</AssemblyVersion>
     <RepositoryType>git</RepositoryType>
     <FileVersion>0.3.1.0</FileVersion>
-    <PackageReleaseNotes>cv2.dnn
-imcrop()</PackageReleaseNotes>
+    <PackageReleaseNotes>cv2.dnn, cv2.morphologyEx, cv2.findContours, cv2.drawContours</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
