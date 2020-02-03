@@ -31,7 +31,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NumSharp" Version="0.20.5" />
+    <PackageReference Include="NumSharp" Version="0.30.0-alpha" />
   </ItemGroup>
 
 </Project>
