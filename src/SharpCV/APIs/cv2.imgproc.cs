@@ -196,18 +196,19 @@ namespace SharpCV
 
         public Mat morphologyEx(Mat src, 
             MorphTypes type, 
-            Mat kernel, 
-            Point anchor = default,
+            Mat kernel,
+            Point? anchor = null,
             int iterations = 1,
             BorderTypes borderType = BorderTypes.BORDER_CONSTANT,
             Scalar borderValue =  default)
         {
             var output = new Mat();
+            if (anchor is null) anchor = new Point(-1, -1);
             cv2_native_api.imgproc_morphologyEx(src.InputArray, 
                 output.OutputArray, 
                 (int)type, 
                 kernel.InputArray,
-                anchor, 
+                anchor.Value, 
                 iterations,
                 (int)borderType,
                 borderValue);
