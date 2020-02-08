@@ -26,6 +26,8 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern unsafe void core_Mat_data(IntPtr mat, out byte* output);
         [DllImport(OpenCvDllName)]
+        internal static extern unsafe void core_Mat_data(IntPtr mat, out int* output);
+        [DllImport(OpenCvDllName)]
         internal static extern unsafe void core_Mat_data(IntPtr mat, out float* output);
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_channels(IntPtr mat, out int output);

@@ -50,9 +50,20 @@ namespace SharpCV
             out IntPtr hierarchy, int mode, int method, Point offset);
 
         [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_findContours1_OutputArray(IntPtr image, out IntPtr contours,
+            IntPtr hierarchy, int mode, int method, Point offset);
+
+        [DllImport(OpenCvDllName)]
         internal static extern void imgproc_drawContours_vector(IntPtr image,
             IntPtr[] contours, int contoursSize1, int[] contoursSize2,
             int contourIdx, Scalar color, int thickness, int lineType,
             IntPtr hierarchy, int hiearchyLength, int maxLevel, Point offset);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_approxPolyDP_InputArray(IntPtr curve, IntPtr approxCurve,
+            double epsilon, bool closed);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_minAreaRect_InputArray(IntPtr points, out RotatedRect output);
     }
 }

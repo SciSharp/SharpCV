@@ -28,14 +28,14 @@ namespace AppConsole
             // Remove horizontal lines
             var horizontal_kernel = cv2.getStructuringElement(MorphShapes.MORPH_RECT, (20, 1));
             var remove_horizontal = cv2.morphologyEx(thresh, MorphTypes.MORPH_OPEN, horizontal_kernel, iterations: 2);
-            var (cnts, _) = cv2.findContours(remove_horizontal, RetrievalModes.RETR_EXTERNAL, ContourApproximationModes.CHAIN_APPROX_SIMPLE);
+            var cnts  = cv2.findContoursAsPoints(remove_horizontal, RetrievalModes.RETR_EXTERNAL, ContourApproximationModes.CHAIN_APPROX_SIMPLE);
             foreach (var c in cnts)
                 cv2.drawContours(image, new[] { c }, -1, (255, 255, 255), 5);
 
             // remove vertical border
             var vertical_kernel = cv2.getStructuringElement(MorphShapes.MORPH_RECT, (1, 20));
             var remove_vertical = cv2.morphologyEx(thresh, MorphTypes.MORPH_OPEN, vertical_kernel, iterations: 2);
-            (cnts, _) = cv2.findContours(remove_vertical, RetrievalModes.RETR_EXTERNAL, ContourApproximationModes.CHAIN_APPROX_SIMPLE);
+            cnts = cv2.findContoursAsPoints(remove_vertical, RetrievalModes.RETR_EXTERNAL, ContourApproximationModes.CHAIN_APPROX_SIMPLE);
             foreach (var c in cnts)
                 cv2.drawContours(image, new[] { c }, -1, (255, 255, 255), 5);
 

@@ -215,7 +215,7 @@ namespace SharpCV
             return output;
         }
 
-        public (Point[][], IntPtr) findContours(Mat src, 
+        public Point[][] findContoursAsPoints(Mat src, 
             RetrievalModes mode, 
             ContourApproximationModes method,
             Point offset = default)
@@ -228,7 +228,24 @@ namespace SharpCV
                 offset);
 
             using (var contoursVec = new VectorOfVectorPoint(contoursPtr))
-                return (contoursVec.ToArray(), hierarchyPtr);
+                return contoursVec.ToArray();
+        }
+
+        public (Mat[], Mat) findContours(Mat src,
+            RetrievalModes mode,
+            ContourApproximationModes method,
+            Point offset = default)
+        {
+            var hierarchy = new Mat();
+            cv2_native_api.imgproc_findContours1_OutputArray(src.OutputArray,
+                out var contoursPtr,
+                hierarchy.OutputArray,
+                (int)mode,
+                (int)method,
+                offset);
+
+            using (var contoursVec = new VectorOfMat(contoursPtr))
+                return (contoursVec.ToArray(), hierarchy);
         }
 
         public void drawContours(Mat image, 
@@ -249,6 +266,22 @@ namespace SharpCV
             }
 
             GC.KeepAlive(image);
+        }
+
+        public Mat approxPolyDP(Mat curve, double epsilon, bool closed)
+        {
+            var approxCurve = new Mat();
+            cv2_native_api.imgproc_approxPolyDP_InputArray(curve.InputArray, 
+                approxCurve.OutputArray, 
+                epsilon, 
+                closed);
+            return approxCurve;
+        }
+
+        public RotatedRect minAreaRect(Mat points)
+        {
+            cv2_native_api.imgproc_minAreaRect_InputArray(points.InputArray, out var rect);
+            return rect;
         }
     }
 }

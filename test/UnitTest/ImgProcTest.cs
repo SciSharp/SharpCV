@@ -80,5 +80,18 @@ namespace UnitTest
             cv2.rectangle(img, (0, 0), (img.shape[1] / 2, img.shape[0] / 2), (255, 0, 0));
             cv2.imwrite("rectangle.jpg", img);
         }
+
+        [TestMethod]
+        public void minAreaRect()
+        {
+            var img = cv2.imread(imgSolar, IMREAD_COLOR.IMREAD_GRAYSCALE);
+            var (ret, thresh) = cv2.threshold(img, 127, 255, 0);
+            var (contours, hierarchy) = cv2.findContours(thresh, RetrievalModes.RETR_LIST, ContourApproximationModes.CHAIN_APPROX_SIMPLE);
+            var cnt = contours[0];
+            var rect = cv2.minAreaRect(cnt);
+            Assert.AreEqual(-90, rect.Angle);
+            Assert.AreEqual((1, 1), rect.Size);
+            Assert.AreEqual((367.5f, 408.5f), rect.Center);
+        }
     }
 }

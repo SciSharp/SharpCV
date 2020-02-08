@@ -13,6 +13,7 @@ namespace SharpCV
         Unknown = -1,
         CV_8UC1 = 0,
         CV_32FC1 = 5,
+        CV_32SC2 = 12,
         CV_8UC3 = 16
     }
 }
