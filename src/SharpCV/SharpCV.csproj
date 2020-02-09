@@ -5,7 +5,7 @@
     <AssemblyName>SharpCV</AssemblyName>
     <RootNamespace>SharpCV</RootNamespace>
     <PackageId>SharpCV</PackageId>
-    <Version>0.3.1</Version>
+    <Version>0.3.2</Version>
     <Authors>Haiping Chen</Authors>
     <Company>SciSharp STACK</Company>
     <Product>SharpCV</Product>
@@ -15,10 +15,10 @@
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/44989469?s=200&amp;v=4</PackageIconUrl>
     <RepositoryUrl>https://github.com/SciSharp/SharpCV</RepositoryUrl>
     <PackageTags>OpenCV</PackageTags>
-    <AssemblyVersion>0.3.1.0</AssemblyVersion>
+    <AssemblyVersion>0.3.2.0</AssemblyVersion>
     <RepositoryType>git</RepositoryType>
-    <FileVersion>0.3.1.0</FileVersion>
-    <PackageReleaseNotes>cv2.dnn, cv2.morphologyEx, cv2.findContours, cv2.drawContours</PackageReleaseNotes>
+    <FileVersion>0.3.2.0</FileVersion>
+    <PackageReleaseNotes>cv2.dnn, cv2.morphologyEx, cv2.findContours, cv2.drawContours, cv2.approxPolyDP, cv2.minAreaRect</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
