@@ -9,5 +9,7 @@ namespace UnitTest
     {
         protected string imgSolar = Path.GetFullPath("../../../../../data/solar.jpg");
         protected string mp4Road = Path.GetFullPath("../../../../../data/road.mp4");
+        protected string UncorrectedImage = Path.GetFullPath("../../../../../data/UncorrectedImage.png");
+
     }
 }
