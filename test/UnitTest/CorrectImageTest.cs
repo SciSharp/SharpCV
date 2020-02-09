@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpCV;
+using System;
 using static SharpCV.Binding;
 
 
@@ -53,7 +54,10 @@ namespace UnitTest
 
             Mat contours_poly = cv2.approxPolyDP(max_contour, 30, true);
             RotatedRect rotatedRect = cv2.minAreaRect(contours_poly);
-            angle = 90.0f + rotatedRect.Angle;
+            angle = rotatedRect.Angle;
+            if (Math.Abs(angle) > 45.0)
+                angle = 90.0f + rotatedRect.Angle;
+
             //var color = cv2.cvtColor(img, ColorConversionCodes.COLOR_GRAY2RGB);
             //cv2.drawContours(color, new[] { max_contour }, -1, (255, 0, 0), 5);   
             //cv2.imwrite("test1.jpg", color); 
