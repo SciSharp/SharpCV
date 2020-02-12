@@ -12,7 +12,7 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_new7(IntPtr mat, Rect rect, out IntPtr returnValue);
         [DllImport(OpenCvDllName)]
-        internal static extern void core_Mat_new8(int rows, int cols, MatType type, IntPtr data, out IntPtr returnValue);
+        internal static extern void core_Mat_new8(int rows, int cols, MatType type, IntPtr data, IntPtr step, out IntPtr returnValue);
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_cols(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]

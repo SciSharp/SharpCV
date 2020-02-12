@@ -120,6 +120,18 @@ namespace SharpCV
             _handle = handle;
         }
 
+        public unsafe Mat(NDArray nd)
+        {
+            switch (nd.ndim)
+            {
+                case 2:
+                    cv2_native_api.core_Mat_new8(nd.shape[0], nd.shape[1], FromType(nd.dtype), new IntPtr(nd.Unsafe.Address), new IntPtr(0), out _handle);
+                    break;
+                default:
+                    throw new NotImplementedException("Not supported");
+            }
+        }
+
         public unsafe NDArray GetData()
         {
             // we pass donothing as it keeps reference to src preventing its disposal by GC
@@ -225,6 +237,17 @@ namespace SharpCV
         public override string ToString()
         {
             return $"{shape.ToString()} {MatType}";
+        }
+
+        public MatType FromType(Type type)
+        {
+            switch (Type.GetTypeCode(type))
+            {
+                case TypeCode.Single:
+                    return MatType.CV_32FC1;
+                default:
+                    return MatType.CV_8UC1;
+            }
         }
     }
 }
