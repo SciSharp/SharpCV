@@ -14,14 +14,15 @@ namespace UnitTest
         [TestMethod]
         public void ndarray()
         {
-            var kernel = np.array(new float[3, 3] 
+            NDArray kernel = new float[3, 3]
             {
                 { 0, -1, 0 },
                 { -1, 5, -1 },
                 { 0, -1, 0 }
-            });
+            };
 
             var mat = new Mat(kernel);
+
             Assert.AreEqual((3, 3), mat.shape);
             Assert.AreEqual(kernel[0], mat.data[0]);
             Assert.AreEqual(kernel[1], mat.data[1]);
