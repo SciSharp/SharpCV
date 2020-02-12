@@ -203,7 +203,8 @@ namespace SharpCV
             Scalar borderValue =  default)
         {
             var output = new Mat();
-            if (anchor is null) anchor = new Point(-1, -1);
+            if (anchor is null) 
+                anchor = new Point(-1, -1);
             cv2_native_api.imgproc_morphologyEx(src.InputArray, 
                 output.OutputArray, 
                 (int)type, 
@@ -282,6 +283,49 @@ namespace SharpCV
         {
             cv2_native_api.imgproc_minAreaRect_InputArray(points.InputArray, out var rect);
             return rect;
+        }
+
+        public Mat medianBlur(Mat src, int kSize)
+        {
+            var dst = new Mat();
+            cv2_native_api.imgproc_medianBlur(src.InputArray, dst.OutputArray, kSize);
+            return dst;
+        }
+
+        public Mat filter2D(Mat src, 
+            MatType ddepth, 
+            Mat kernel,
+            Point? anchor = null,
+            double delta = 0,
+            BorderTypes borderType = BorderTypes.BORDER_DEFAULT)
+        {
+            var dst = new Mat();
+            if (anchor is null) 
+                anchor = new Point(-1, -1);
+            cv2_native_api.imgproc_filter2D(src.InputArray,
+                dst.OutputArray,
+                ddepth,
+                kernel.InputArray,
+                anchor.Value,
+                delta,
+                borderType);
+            return dst;
+        }
+
+        public Mat blur(Mat src, 
+            Size kSize,
+            Point? anchor = null,
+            BorderTypes borderType = BorderTypes.BORDER_DEFAULT)
+        {
+            var dst = new Mat();
+            if (anchor is null) 
+                anchor = new Point(-1, -1);
+            cv2_native_api.imgproc_blur(src.InputArray,
+                dst.OutputArray,
+                kSize,
+                anchor.Value,
+                borderType);
+            return dst;
         }
     }
 }

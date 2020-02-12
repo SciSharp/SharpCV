@@ -65,5 +65,15 @@ namespace SharpCV
 
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_minAreaRect_InputArray(IntPtr points, out RotatedRect output);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_medianBlur(IntPtr src, IntPtr dst, int kSize);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_filter2D(IntPtr src, IntPtr dst, MatType ddepth, IntPtr kernel, Point anchor,
+            double delta, BorderTypes borderType);
+
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_blur(IntPtr src, IntPtr dst, Size kSize, Point anchor, BorderTypes borderType);
     }
 }
