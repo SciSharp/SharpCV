@@ -14,7 +14,7 @@ namespace UnitTest
         [TestMethod]
         public void ndarray()
         {
-            NDArray kernel = new float[3, 3]
+            NDArray kernel = new float[,]
             {
                 { 0, -1, 0 },
                 { -1, 5, -1 },

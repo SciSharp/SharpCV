@@ -1,6 +1,6 @@
 # SharpCV
 
-A image library combines [OpenCV](https://github.com/opencv/opencv) and [NumSharp](https://github.com/SciSharp/NumSharp) together. `SharpCV` returns `Mat` object with `NDArray` supported, which makes it easier to do data manipulation like slicing.
+A image library combines [OpenCV](https://github.com/opencv/opencv) and [NumSharp](https://github.com/SciSharp/NumSharp.Lite) together. `SharpCV` returns `Mat` object with `NDArray` supported, which makes it easier to do data manipulation like slicing.
 
 [![Join the chat at https://gitter.im/publiclab/publiclab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sci-sharp/community) [![NuGet](https://img.shields.io/nuget/dt/SharpCV.svg)](https://www.nuget.org/packages/SharpCV)
 
@@ -9,15 +9,34 @@ A image library combines [OpenCV](https://github.com/opencv/opencv) and [NumShar
 Install OpenCV prebuild binary
 
 ```powershell
-PM> Install-Package OpenCvSharp4.runtime.win
 PM> Install-Package SharpCV
+PM> Install-Package OpenCvSharp4.runtime.win
 ```
 Import SharpCV and OpenCV library
 ```csharp
 using SharpCV;
 using static SharpCV.Binding;
 ```
+Interact with `NDArray`
+
+```csharp
+NDArray kernel = new float[,]
+{
+    { 0, -1, 0 },
+    { -1, 5, -1 },
+    { 0, -1, 0 }
+};
+
+var mat = new Mat(kernel);
+
+Assert.AreEqual((3, 3), mat.shape);
+Assert.AreEqual(kernel[0], mat.data[0]); // { 0, -1, 0 }
+Assert.AreEqual(kernel[1], mat.data[1]); // { -1, 5, -1 }
+Assert.AreEqual(kernel[2], mat.data[2]); // { 0, -1, 0 }
+```
+
 Convert to black and white image
+
 ```csharp
 var img = cv2.imread("solar.jpg");
 var gray = cv2.cvtColor(img, ColorConversionCodes.COLOR_RGB2GRAY);
