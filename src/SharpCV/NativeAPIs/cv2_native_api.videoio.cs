@@ -12,6 +12,6 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void videoio_VideoCapture_new3(int device, int api, out IntPtr output);
         [DllImport(OpenCvDllName)]
-        internal static extern void videoio_VideoCapture_read(IntPtr vid, IntPtr frame, out int output);
+        internal static extern void videoio_VideoCapture_read_Mat(IntPtr vid, IntPtr frame, out int output);
     }
 }

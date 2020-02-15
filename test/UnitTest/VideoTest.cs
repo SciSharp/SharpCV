@@ -27,7 +27,7 @@ namespace UnitTest
             Assert.AreEqual(3, lastFrame.shape[2]);
         }
 
-        [Ignore]
+        //[Ignore]
         [TestMethod]
         public void VideoCaptureFromCamera()
         {

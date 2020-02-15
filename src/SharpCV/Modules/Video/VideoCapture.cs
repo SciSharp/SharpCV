@@ -14,7 +14,7 @@ namespace SharpCV
         public (bool, Mat) read()
         {
             var dst = new Mat();
-            cv2_native_api.videoio_VideoCapture_read(_handle, dst.OutputArray, out var output);
+            cv2_native_api.videoio_VideoCapture_read_Mat(_handle, dst, out var output);
             return (output != 0, dst);
         }
     }
