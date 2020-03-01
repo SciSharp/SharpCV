@@ -21,5 +21,19 @@ namespace SharpCV
                 return new Mat(handle);
             }
         }
+
+        public unsafe NDArray this[int row, int col]
+        {
+            get
+            {
+                cv2_native_api.core_Mat_ptr2d(_handle, row, col, out var output);
+                return ndim switch
+                {
+                    2 => NDArray.Scalar(*(byte*)output),
+                    3 => np.array(*(byte*)output, *((byte*)output + 1), *((byte*)output + 2)),
+                    _ => throw new NotImplementedException($"Can't found index access for ndim: {ndim}")
+                };
+            }
+        }
     }
 }

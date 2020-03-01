@@ -18,6 +18,8 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_rows(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
+        internal static extern void core_Mat_ptr2d(IntPtr mat, int row, int col, out IntPtr output);
+        [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_dims(IntPtr mat, out int output);
         [DllImport(OpenCvDllName)]
         internal static extern void core_Mat_sizeAt(IntPtr mat, int dim, out int output);

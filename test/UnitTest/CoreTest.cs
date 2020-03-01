@@ -11,6 +11,19 @@ namespace UnitTest
     public class CoreTest : Test
     {
         [TestMethod]
+        public void pixel()
+        {
+            var img1 = cv2.imread(imgSolar);
+            var ndim = img1.ndim;
+            var (b, g, r) = img1[8, 8];
+            Assert.AreEqual((32, 19, 11), (b, g, r));
+
+            var img2 = cv2.imread(imgSolar, IMREAD_COLOR.IMREAD_GRAYSCALE);
+            byte p = img2[8, 8];
+            Assert.AreEqual(18, p);
+        }
+
+        [TestMethod]
         public void hconcat()
         {
             var img = cv2.imread(imgSolar);

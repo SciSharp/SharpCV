@@ -35,6 +35,18 @@ Assert.AreEqual(kernel[1], mat.data[1]); // { -1, 5, -1 }
 Assert.AreEqual(kernel[2], mat.data[2]); // { 0, -1, 0 }
 ```
 
+Pixel level access
+
+```csharp
+var img = cv2.imread(imgSolar, IMREAD_COLOR.IMREAD_GRAYSCALE);
+byte p = img[8, 8];
+Assert.AreEqual(18, p);
+
+img = cv2.imread(imgSolar);
+var (b, g, r) = img[8, 8];
+Assert.AreEqual((32, 19, 11), (b, g, r));
+```
+
 Convert to black and white image
 
 ```csharp
