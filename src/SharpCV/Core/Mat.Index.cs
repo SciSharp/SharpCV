@@ -34,6 +34,26 @@ namespace SharpCV
                     _ => throw new NotImplementedException($"Can't found index access for ndim: {ndim}")
                 };
             }
+
+            set
+            {
+                // BGR format
+            }
+        }
+
+        public unsafe byte this[int row, int col, int channel]
+        {
+            get
+            {
+                cv2_native_api.core_Mat_ptr2d(_handle, row, col, out var output);
+                return channel switch
+                {
+                    0 => *(byte*)output,
+                    1 => *((byte*)output + 1),
+                    2 => *((byte*)output + 2),
+                    _ => throw new NotImplementedException($"Channel can't exceed {channel}")
+                };
+            }
         }
     }
 }

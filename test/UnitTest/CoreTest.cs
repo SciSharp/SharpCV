@@ -11,16 +11,29 @@ namespace UnitTest
     public class CoreTest : Test
     {
         [TestMethod]
-        public void pixel()
+        public void pixel_getter()
         {
+            // getter
             var img1 = cv2.imread(imgSolar);
-            var ndim = img1.ndim;
             var (b, g, r) = img1[8, 8];
+            Assert.AreEqual((32, 19, 11), (b, g, r));
+
+            // access specific channel
+            b = img1[8, 8, 0];
+            g = img1[8, 8, 1];
+            r = img1[8, 8, 2];
             Assert.AreEqual((32, 19, 11), (b, g, r));
 
             var img2 = cv2.imread(imgSolar, IMREAD_COLOR.IMREAD_GRAYSCALE);
             byte p = img2[8, 8];
             Assert.AreEqual(18, p);
+        }
+
+        [TestMethod]
+        public void pixel_setter()
+        {
+            var img = cv2.imread(imgSolar);
+            // img[8, 8] = (0, 0, 255);
         }
 
         [TestMethod]
