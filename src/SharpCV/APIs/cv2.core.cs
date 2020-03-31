@@ -23,6 +23,15 @@ namespace SharpCV
             return dst;
         }
 
+        public Mat[] split(Mat img)
+        {
+            using (var vec = new VectorOfMat())
+            {
+                cv2_native_api.core_split(img, vec);
+                return vec.ToArray();
+            }
+        }
+
         public Mat hconcat(params Mat[] imgs)
         {
             var dst = new Mat();

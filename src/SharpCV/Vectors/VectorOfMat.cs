@@ -44,5 +44,8 @@ namespace SharpCV
 
             return dst;
         }
+
+        public static implicit operator IntPtr(VectorOfMat mat)
+            => mat._handle;
     }
 }

@@ -117,6 +117,7 @@ namespace SharpCV
             // we pass donothing as it keeps reference to src preventing its disposal by GC
             switch (MatType)
             {
+                case MatType.CV_32SC1:
                 case MatType.CV_32SC2:
                     {
                         cv2_native_api.core_Mat_data(_handle, out int* dataPtr);
@@ -211,14 +212,11 @@ namespace SharpCV
         }
 
         public MatType FromType(Type type)
-        {
-            switch (Type.GetTypeCode(type))
+            => Type.GetTypeCode(type) switch
             {
-                case TypeCode.Single:
-                    return MatType.CV_32FC1;
-                default:
-                    return MatType.CV_8UC1;
-            }
-        }
+                TypeCode.Int32 => MatType.CV_32SC1,
+                TypeCode.Single => MatType.CV_32FC1,
+                _ => MatType.CV_8UC1
+            };
     }
 }

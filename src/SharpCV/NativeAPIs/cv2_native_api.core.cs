@@ -56,6 +56,8 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void core_hconcat2(IntPtr mat1, IntPtr mat2, IntPtr dst);
         [DllImport(OpenCvDllName)]
+        internal static extern void core_split(IntPtr src, IntPtr mv);
+        [DllImport(OpenCvDllName)]
         internal static extern void core_vconcat2(IntPtr mat1, IntPtr mat2, IntPtr dst);
     }
 }

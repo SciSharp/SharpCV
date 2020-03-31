@@ -22,7 +22,7 @@ namespace SharpCV
             switch (nd.ndim)
             {
                 case 2:
-                    cv2_native_api.core_Mat_new8(nd.shape[0], nd.shape[1], FromType(nd.dtype), new IntPtr(nd.Unsafe.Address), new IntPtr(0), out _handle);
+                    cv2_native_api.core_Mat_new8(nd.shape[0], nd.shape[1], FromType(nd.dtype), new IntPtr(nd.Unsafe.Storage.Address), new IntPtr(0), out _handle);
                     break;
                 default:
                     throw new NotImplementedException("Not supported");

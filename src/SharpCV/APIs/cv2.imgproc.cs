@@ -19,6 +19,13 @@ namespace SharpCV
             return dst;
         }
 
+        public double contourArea(Mat img,
+            bool oriented = false)
+        {
+            cv2_native_api.imgproc_contourArea_InputArray(img.InputArray, oriented ? 1 : 0, out var output);
+            return output;
+        }
+
         public Mat adaptiveThreshold(Mat img,
             double maxValue,
             AdaptiveThresholdTypes method,
@@ -269,6 +276,28 @@ namespace SharpCV
             GC.KeepAlive(image);
         }
 
+        public void drawContours(Mat image,
+            Mat contour,
+            int contourIdx,
+            Scalar color,
+            int thickness = 1,
+            LineTypes lineType = LineTypes.LINE_8,
+            Mat? hierarchy = null,
+            int maxLevel = int.MaxValue,
+            Point? offset = null)
+        {
+            if (offset is null)
+                offset = new Point(-1, -1);
+            var contoursPtr = new IntPtr[] { contour };
+
+            cv2_native_api.imgproc_drawContours_InputArray(
+                        image.OutputArray, contoursPtr, 1,
+                        contourIdx, color, thickness, lineType, 
+                        hierarchy ?? IntPtr.Zero, maxLevel, offset.Value);
+
+            GC.KeepAlive(image);
+        }
+
         public Mat approxPolyDP(Mat curve, double epsilon, bool closed)
         {
             var approxCurve = new Mat();
@@ -284,6 +313,9 @@ namespace SharpCV
             cv2_native_api.imgproc_minAreaRect_InputArray(points.InputArray, out var rect);
             return rect;
         }
+
+        public Moments moments(Mat src, bool binaryImage = false)
+            => new Moments(src, binaryImage);
 
         public Mat medianBlur(Mat src, int kSize)
         {

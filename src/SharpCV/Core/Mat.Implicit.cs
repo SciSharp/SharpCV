@@ -15,5 +15,8 @@ namespace SharpCV
 
         public static implicit operator NDArray(Mat mat)
             => mat.data;
+
+        public static implicit operator Mat(NDArray nd)
+            => new Mat(nd);
     }
 }

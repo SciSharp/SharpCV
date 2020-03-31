@@ -11,6 +11,8 @@ namespace SharpCV
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_cvtColor(IntPtr src, IntPtr dst, int code, int dstCnt);
         [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_contourArea_InputArray(IntPtr contour, int oriented, out double output);
+        [DllImport(OpenCvDllName)]
         internal static extern void imgproc_threshold(IntPtr src, IntPtr dst, double thresh, double maxval, int type, out double output);
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_resize(IntPtr src, IntPtr dst, Size dsize, double fx, double fy, int interpolation);
@@ -58,13 +60,20 @@ namespace SharpCV
             IntPtr[] contours, int contoursSize1, int[] contoursSize2,
             int contourIdx, Scalar color, int thickness, int lineType,
             IntPtr hierarchy, int hiearchyLength, int maxLevel, Point offset);
-
+        [DllImport(OpenCvDllName)]
+        public static extern void imgproc_drawContours_InputArray(IntPtr image,
+            IntPtr[] contours, int contoursLength,
+            int contourIdx, Scalar color, int thickness, LineTypes lineType,
+            IntPtr hierarchy, int maxLevel, Point offset);
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_approxPolyDP_InputArray(IntPtr curve, IntPtr approxCurve,
             double epsilon, bool closed);
 
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_minAreaRect_InputArray(IntPtr points, out RotatedRect output);
+        
+        [DllImport(OpenCvDllName)]
+        internal static extern void imgproc_moments(IntPtr arr, int binaryImage, out Moments.NativeStruct output);
 
         [DllImport(OpenCvDllName)]
         internal static extern void imgproc_medianBlur(IntPtr src, IntPtr dst, int kSize);
