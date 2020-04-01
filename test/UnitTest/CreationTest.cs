@@ -69,7 +69,7 @@ namespace UnitTest
         public void ndarray_mat_3x5()
         {
             var img = cv2.imread(img3x5);
-            var nd = img.data[":,:,0"];
+            var nd = img.data[":,:,0"].copy();
             var mat = new Mat(nd);
 
             Assert.AreEqual((5, 3), nd.Shape);
