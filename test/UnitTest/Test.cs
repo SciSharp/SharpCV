@@ -7,6 +7,7 @@ namespace UnitTest
 {
     public abstract class Test
     {
+        protected string img3x5 = Path.GetFullPath("../../../../../data/3x5.jpg");
         protected string imgSolar = Path.GetFullPath("../../../../../data/solar.jpg");
         protected string mp4Road = Path.GetFullPath("../../../../../data/road.mp4");
         protected string UncorrectedImage = Path.GetFullPath("../../../../../data/UncorrectedImage.png");

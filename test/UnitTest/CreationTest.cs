@@ -66,13 +66,13 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void ndarray_mat()
+        public void ndarray_mat_3x5()
         {
-            var img = cv2.imread(imgSolar);
+            var img = cv2.imread(img3x5);
             var nd = img.data[":,:,0"];
             var mat = new Mat(nd);
 
-            Assert.AreEqual((410, 730), nd.Shape);
+            Assert.AreEqual((5, 3), nd.Shape);
             Assert.AreEqual(nd[0], mat.data[0]);
             Assert.AreEqual(nd[1], mat.data[1]);
             Assert.AreEqual(nd[2], mat.data[2]);
