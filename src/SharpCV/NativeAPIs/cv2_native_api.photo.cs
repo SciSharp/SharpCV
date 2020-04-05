@@ -7,11 +7,11 @@ namespace SharpCV
 {
     internal partial class cv2_native_api
     {
-        [DllImport(OpenCvDllName)]
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void photo_fastNlMeansDenoising(IntPtr src, IntPtr dst, float h,
             int templateWindowSize, int searchWindowSize);
 
-        [DllImport(OpenCvDllName)]
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void photo_fastNlMeansDenoisingColored(IntPtr src, IntPtr dst,
             float h, float hColor, int templateWindowSize, int searchWindowSize);
     }

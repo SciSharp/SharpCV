@@ -7,15 +7,15 @@ namespace SharpCV
 {
     internal partial class cv2_native_api
     {
-        [DllImport(OpenCvDllName)]
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void highgui_imshow(string winName, IntPtr mat);
-        [DllImport(OpenCvDllName)]
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void highgui_namedWindow(string winName, int flags);
-        [DllImport(OpenCvDllName)]
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void highgui_resizeWindow(string winName, int width, int height);
-        [DllImport(OpenCvDllName)]
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void highgui_waitKey(int delay, out int output);
-        [DllImport(OpenCvDllName)]
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void highgui_destroyAllWindows();
     }
 }

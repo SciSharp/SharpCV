@@ -6,7 +6,7 @@
     <AssemblyName>SharpCV</AssemblyName>
     <RootNamespace>SharpCV</RootNamespace>
     <PackageId>SharpCV</PackageId>
-    <Version>0.4.5</Version>
+    <Version>0.5.0</Version>
     <Authors>Haiping Chen</Authors>
     <Company>SciSharp STACK</Company>
     <Product>SharpCV</Product>
@@ -16,10 +16,11 @@
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/44989469?s=200&amp;v=4</PackageIconUrl>
     <RepositoryUrl>https://github.com/SciSharp/SharpCV</RepositoryUrl>
     <PackageTags>OpenCV</PackageTags>
-    <AssemblyVersion>0.4.5.0</AssemblyVersion>
+    <AssemblyVersion>0.5.0.0</AssemblyVersion>
     <RepositoryType>git</RepositoryType>
-    <FileVersion>0.4.5.0</FileVersion>
-    <PackageReleaseNotes>cv2.dnn, cv2.morphologyEx, cv2.findContours, cv2.drawContours, cv2.approxPolyDP, cv2.minAreaRect</PackageReleaseNotes>
+    <FileVersion>0.5.0.0</FileVersion>
+    <PackageReleaseNotes>cv2.dnn, cv2.morphologyEx, cv2.findContours, cv2.drawContours, cv2.approxPolyDP, cv2.minAreaRect, cv2.split</PackageReleaseNotes>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,10 +34,6 @@
 
   <ItemGroup>
     <PackageReference Include="NumSharp.Lite" Version="0.1.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\NumSharp.Lite\NumSharp\NumSharp.Lite.csproj" />
   </ItemGroup>
 
 </Project>
