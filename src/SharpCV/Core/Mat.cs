@@ -216,6 +216,7 @@ namespace SharpCV
             {
                 TypeCode.Int32 => MatType.CV_32SC1,
                 TypeCode.Single => MatType.CV_32FC1,
+                TypeCode.Double => MatType.CV_64FC1,
                 _ => MatType.CV_8UC1
             };
     }

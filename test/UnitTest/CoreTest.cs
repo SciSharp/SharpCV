@@ -80,14 +80,12 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void NDShow()
+        public void imshow_from_ndarray()
         {
-            string path = Path.GetFullPath(@"..//..//..//") + "data//mnist_first_image_data.txt";
-            var data = File.ReadLines(path);
-            var listDouble = data.Select(Convert.ToDouble).ToArray();
-            NDArray mnist_image1 = new NDArray(listDouble);
-            mnist_image1 = mnist_image1.reshape(new int[] { 28, 28, 1 });
-            cv2.imshow("NDShowTest", mnist_image1);
+            var mnist_image_5 = np.load(MNIST_Image_5);
+            mnist_image_5 = mnist_image_5.reshape((28, 28));
+            // cv2.imshow("Show MNIST 5", mnist_image_5);
+            // cv2.waitKey(0);
         }
     }
 }
