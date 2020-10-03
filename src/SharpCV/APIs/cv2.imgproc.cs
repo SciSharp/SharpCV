@@ -157,7 +157,7 @@ namespace SharpCV
             LineTypes type = LineTypes.LINE_8,
             int shift = 0)
         {
-            cv2_native_api.imgproc_rectangle_InputOutputArray(img.OutputArray,
+            cv2_native_api.imgproc_rectangle_InputOutputArray_Point(img.OutputArray,
                 leftTop,
                 rightBottom,
                 color,

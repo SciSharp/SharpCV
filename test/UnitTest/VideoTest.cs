@@ -20,8 +20,13 @@ namespace UnitTest
                 frameCnt++;
                 lastFrame = frame;
                 (loaded, frame) = vid.read();
+                /*if (loaded)
+                {
+                    cv2.imshow("video frame", frame);
+                    cv2.waitKey(0);
+                }*/
             }
-            Assert.AreEqual(31, frameCnt);
+            Assert.AreEqual(38, frameCnt);
             Assert.AreEqual(720, lastFrame.shape[0]);
             Assert.AreEqual(1280, lastFrame.shape[1]);
             Assert.AreEqual(3, lastFrame.shape[2]);
