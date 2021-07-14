@@ -7,11 +7,21 @@ namespace UnitTest
 {
     public abstract class Test
     {
-        protected string img3x5 = Path.GetFullPath("../../../../../data/3x5.jpg");
-        protected string imgSolar = Path.GetFullPath("../../../../../data/solar.jpg");
-        protected string mp4Road = Path.GetFullPath("../../../../../data/road.mp4");
-        protected string UncorrectedImage = Path.GetFullPath("../../../../../data/UncorrectedImage.png");
-        protected string SmoothImage = Path.GetFullPath("../../../../../data/SmoothImage.jpg");
-        protected string MNIST_Image_5 = Path.GetFullPath("../../../../../data/mnist_image_5.npy");
+        public string datadir = Path.GetFullPath("../../../../../../data");
+        protected string img3x5;
+        protected string imgSolar;
+        protected string mp4Road;
+        protected string UncorrectedImage;
+        protected string SmoothImage;
+        protected string MNIST_Image_5;
+        public Test()
+        {
+            img3x5 = Path.Combine(datadir, "3x5.jpg");
+            imgSolar = Path.Combine(datadir, "solar.jpg");
+            mp4Road = Path.Combine(datadir, "road.mp4");
+            UncorrectedImage = Path.Combine(datadir, "UncorrectedImage.png");
+            SmoothImage = Path.Combine(datadir, "SmoothImage.jpg");
+            MNIST_Image_5 = Path.Combine(datadir, "mnist_image_5.npy");
+        }
     }
 }

@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NumSharp;
 using SharpCV;
 using System.IO;
 using static SharpCV.Binding;
@@ -67,7 +66,7 @@ namespace UnitTest
         public void rotate()
         {
             var img = cv2.imread(imgSolar);
-            var rotated = cv2.rotate(img, (img.shape[1] / 2, img.shape[0] / 2), 180, 1.0);
+            var rotated = cv2.rotate(img, ((int)img.shape[1] / 2, (int)img.shape[0] / 2), 180, 1.0);
             Assert.AreEqual(410, rotated.shape[0]);
             Assert.AreEqual(730, rotated.shape[1]);
             Assert.AreEqual(3, rotated.shape[2]);

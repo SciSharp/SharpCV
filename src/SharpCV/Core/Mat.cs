@@ -1,11 +1,9 @@
-﻿using NumSharp;
-using NumSharp.Backends;
-using NumSharp.Backends.Unmanaged;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text;
+using Tensorflow;
+using Tensorflow.NumPy;
 
 namespace SharpCV
 {
@@ -33,7 +31,7 @@ namespace SharpCV
             }
         }
 
-        public NPTypeCode dtype { get; set; } = NPTypeCode.Byte;
+        public TF_DataType dtype { get; set; } = np.@byte;
 
         MatType _matType = MatType.Unknown;
         public MatType MatType
@@ -75,7 +73,7 @@ namespace SharpCV
             }
         }
 
-        public int size => shape.Size;
+        public long size => shape.size;
 
         IntPtr _intputArray;
         public IntPtr InputArray
@@ -121,74 +119,24 @@ namespace SharpCV
                 case MatType.CV_32SC2:
                     {
                         cv2_native_api.core_Mat_data(_handle, out int* dataPtr);
-                        var block = new UnmanagedMemoryBlock<int>(dataPtr, shape.Size, () => DoNothing(_handle));
-                        var storage = new UnmanagedStorage(new ArraySlice<int>(block), shape);
-                        dtype = NPTypeCode.Int32;
-                        return new NDArray(storage);
+                        dtype = TF_DataType.TF_INT32;
+                        return new NDArray(new IntPtr(dataPtr), shape, dtype);
                     }
                 case MatType.CV_32FC1:
                     {
                         cv2_native_api.core_Mat_data(_handle, out float* dataPtr);
-                        var block = new UnmanagedMemoryBlock<float>(dataPtr, shape.Size, () => DoNothing(_handle));
-                        var storage = new UnmanagedStorage(new ArraySlice<float>(block), shape);
-                        dtype = NPTypeCode.Float;
-                        return new NDArray(storage);
+                        dtype = TF_DataType.TF_FLOAT;
+                        return new NDArray(new IntPtr(dataPtr), shape, dtype);
                     }
                 case MatType.CV_8UC1:
                 case MatType.CV_8UC3:
                     {
                         cv2_native_api.core_Mat_data(_handle, out byte* dataPtr);
-                        var block = new UnmanagedMemoryBlock<byte>(dataPtr, size, () => DoNothing(_handle));
-                        var storage = new UnmanagedStorage(new ArraySlice<byte>(block), shape);
-                        dtype = NPTypeCode.Byte;
-                        return new NDArray(storage);
+                        dtype = TF_DataType.TF_UINT8;
+                        return new NDArray(new IntPtr(dataPtr), shape, dtype);
                     }
                 default:
                     throw new NotImplementedException($"Can't find type: {_matType}");
-            }
-        }
-
-        //this method copies Mat to a new NDArray
-        private unsafe NDArray CopyToNDArray()
-        {
-            cv2_native_api.core_Mat_cols(_handle, out var width);
-            cv2_native_api.core_Mat_rows(_handle, out var height);
-            cv2_native_api.core_Mat_data(_handle, out byte* data);
-
-            /*var nd = new NDArray(NPTypeCode.Byte, (1, height, width, type), fillZeros: false);
-            new UnmanagedMemoryBlock<byte>(data, nd.size)
-                .CopyTo(nd.Unsafe.Address);
-
-            return nd;*/
-            return new NDArray(NPTypeCode.Byte);
-        }
-
-        //this method wraps without copying Mat.
-        private unsafe NDArray WrapWithNDArray()
-        {
-            cv2_native_api.core_Mat_cols(_handle, out var width);
-            cv2_native_api.core_Mat_rows(_handle, out var height);
-            cv2_native_api.core_Mat_channels(_handle, out var channels);
-
-            Shape shape = (height, width, channels);
-
-            // we pass donothing as it keeps reference to src preventing its disposal by GC
-            switch (dtype)
-            {
-                case NPTypeCode.Single:
-                    {
-                        cv2_native_api.core_Mat_data(_handle, out float* dataPtr);
-                        var block = new UnmanagedMemoryBlock<float>(dataPtr, shape.Size, () => DoNothing(_handle));
-                        var storage = new UnmanagedStorage(new ArraySlice<float>(block), shape);
-                        return new NDArray(storage);
-                    }
-                default:
-                    {
-                        cv2_native_api.core_Mat_data(_handle, out byte* dataPtr);
-                        var block = new UnmanagedMemoryBlock<byte>(dataPtr, shape.Size, () => DoNothing(_handle));
-                        var storage = new UnmanagedStorage(new ArraySlice<byte>(block), shape);
-                        return new NDArray(storage);
-                    }
             }
         }
 
@@ -208,7 +156,7 @@ namespace SharpCV
 
         public override string ToString()
         {
-            return $"{shape.ToString()} {MatType}";
+            return $"{shape} {MatType}";
         }
 
         public MatType FromType(Type type)
@@ -217,6 +165,15 @@ namespace SharpCV
                 TypeCode.Int32 => MatType.CV_32SC1,
                 TypeCode.Single => MatType.CV_32FC1,
                 TypeCode.Double => MatType.CV_64FC1,
+                _ => MatType.CV_8UC1
+            };
+
+        public MatType FromType(TF_DataType dtype)
+            => dtype switch
+            {
+                TF_DataType.TF_INT32 => MatType.CV_32SC1,
+                TF_DataType.TF_FLOAT => MatType.CV_32FC1,
+                TF_DataType.TF_DOUBLE => MatType.CV_64FC1,
                 _ => MatType.CV_8UC1
             };
     }

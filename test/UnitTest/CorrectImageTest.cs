@@ -31,7 +31,7 @@ namespace UnitTest
             Mat img = imread();
             var angle = findAngle(img);
             Mat correctedImage = new Mat();
-            (int, int) center = (img.shape[0] / 2, img.shape[1] / 2);
+            var center = ((int)img.shape[0] / 2, (int)img.shape[1] / 2);
             correctedImage = cv2.rotate(img, center, angle, 1.0, InterpolationFlags.INTER_LINEAR, BorderTypes.BORDER_DEFAULT);
             imwrite(correctedImage);
         }

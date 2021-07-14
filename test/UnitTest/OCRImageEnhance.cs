@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NumSharp;
 using SharpCV;
 using System;
+using Tensorflow.NumPy;
 using static SharpCV.Binding;
 
 namespace UnitTest

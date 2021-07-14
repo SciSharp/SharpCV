@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static SharpCV.Binding;
-using NumSharp;
+using Tensorflow.NumPy;
 using System.IO;
 using System.Linq;
 
@@ -84,8 +84,8 @@ namespace UnitTest
         {
             var mnist_image_5 = np.load(MNIST_Image_5);
             mnist_image_5 = mnist_image_5.reshape((28, 28));
-            // cv2.imshow("Show MNIST 5", mnist_image_5);
-            // cv2.waitKey(0);
+            //cv2.imshow("Show MNIST 5", mnist_image_5);
+            //cv2.waitKey(0);
         }
     }
 }

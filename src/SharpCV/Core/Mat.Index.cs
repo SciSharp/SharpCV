@@ -1,11 +1,9 @@
-﻿using NumSharp;
-using NumSharp.Backends;
-using NumSharp.Backends.Unmanaged;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using Tensorflow.NumPy;
 
 namespace SharpCV
 {
