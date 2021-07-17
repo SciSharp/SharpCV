@@ -37,10 +37,9 @@ namespace UnitTest
 		[TestMethod]
 		public void imendecode()
 		{
-            var fbs = System.IO.File.ReadAllBytes(imgSolar);
-            var mat = cv2.ImDecode(fbs);
-            cv2.ImEncode(".png", mat,out byte[] fbs_png);
-            var mat2 = cv2.ImDecode(fbs_png);
+            var mat = cv2.imread(imgSolar);
+            var fbs_png = mat.ImEncode();
+            var mat2 = SharpCV.Mat.ImDecode(fbs_png);
 
             CollectionAssert.AreEqual(mat.data.ToByteArray(), mat2.data.ToByteArray());
 		}
