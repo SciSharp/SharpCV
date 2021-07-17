@@ -31,7 +31,7 @@ namespace SharpCV
         /// <param name="span">The input slice of bytes.</param>
         /// <param name="flags">The same flags as in imread</param>
         /// <returns></returns>
-        public static Mat ImDecode(ReadOnlySpan<byte> span, IMREAD_COLOR flags)
+        public Mat ImDecode(ReadOnlySpan<byte> span, IMREAD_COLOR flags = IMREAD_COLOR.IMREAD_COLOR)
         {
             if (span.IsEmpty)
                 throw new ArgumentException("Empty span", nameof(span));
@@ -53,7 +53,7 @@ namespace SharpCV
         /// <param name="img">The image to be written</param>
         /// <param name="buf">Output buffer resized to fit the compressed image.</param>
         /// <param name="prms">Format-specific parameters.</param>
-        public static bool ImEncode(string ext, Mat img, out byte[] buf, int[]? prms = null)
+        public bool ImEncode(string ext, Mat img, out byte[] buf, int[]? prms = null)
         {
             if (string.IsNullOrEmpty(ext))
                 throw new ArgumentNullException(nameof(ext));
