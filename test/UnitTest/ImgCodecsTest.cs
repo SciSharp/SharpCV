@@ -33,5 +33,16 @@ namespace UnitTest
             var cropped2 = img[(50, 400), (150, 350)];
             Assert.AreEqual((350, 200, 3), cropped2.shape);
         }
+
+		[TestMethod]
+		public void imendecode()
+		{
+            var fbs = System.IO.File.ReadAllBytes(imgSolar);
+            var mat = cv2.ImDecode(fbs);
+            cv2.ImEncode(".png", mat,out byte[] fbs_png);
+            var mat2 = cv2.ImDecode(fbs_png);
+
+            CollectionAssert.AreEqual(mat.data.ToByteArray(), mat2.data.ToByteArray());
+		}
     }
 }
