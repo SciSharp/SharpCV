@@ -33,5 +33,15 @@ namespace UnitTest
             var cropped2 = img[(50, 400), (150, 350)];
             Assert.AreEqual((350, 200, 3), cropped2.shape);
         }
+
+		[TestMethod]
+		public void imendecode()
+		{
+            var mat = cv2.imread(imgSolar);
+            var fbs_png = mat.ImEncode();
+            var mat2 = SharpCV.Mat.ImDecode(fbs_png);
+
+            CollectionAssert.AreEqual(mat.data.ToByteArray(), mat2.data.ToByteArray());
+		}
     }
 }

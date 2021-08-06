@@ -179,5 +179,106 @@ namespace SharpCV
                 TF_DataType.TF_DOUBLE => MatType.CV_64FC1,
                 _ => MatType.CV_8UC1
             };
+
+        #region ImEncode / ToBytes
+
+        /// <summary>
+        /// Encodes an image into a memory buffer.
+        /// </summary>
+        /// <param name="ext">Encodes an image into a memory buffer.</param>
+        /// <param name="prms">Format-specific parameters.</param>
+        /// <returns></returns>
+        public byte[] ImEncode(string ext = ".png", int[]? prms = null)
+        {
+            //ThrowIfDisposed();
+            SharpCV.cv_api.ImEncode(ext, this, out var buf, prms);
+            return buf;
+        }
+
+        ///// <summary>
+        ///// Encodes an image into a memory buffer.
+        ///// </summary>
+        ///// <param name="ext">Encodes an image into a memory buffer.</param>
+        ///// <param name="prms">Format-specific parameters.</param>
+        ///// <returns></returns>
+        //public byte[] ImEncode(string ext = ".png", params ImageEncodingParam[] prms)
+        //{
+        //    //ThrowIfDisposed();
+        //    SharpCV.cv_api.ImEncode(ext, this, out var buf, prms);
+        //    return buf;
+        //}
+
+        #endregion
+
+        #region Static Initializers
+
+        /// <summary>
+        /// Creates the Mat instance from System.IO.Stream
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public static Mat FromStream(System.IO.Stream stream, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
+        {
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+            if (stream.Length > int.MaxValue)
+                throw new ArgumentException("Not supported stream (too long)");
+
+            using var memoryStream = new System.IO.MemoryStream();
+            stream.CopyTo(memoryStream);
+
+            return FromImageData(memoryStream.ToArray(), mode);
+        }
+
+        /// <summary>
+        /// Creates the Mat instance from image data (using cv::decode) 
+        /// </summary>
+        /// <param name="imageBytes"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public static Mat ImDecode(byte[] imageBytes, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
+        {
+            if (imageBytes == null)
+                throw new ArgumentNullException(nameof(imageBytes));
+            return cv_api.ImDecode(imageBytes, mode);
+        }
+
+        /// <summary>
+        /// Reads image from the specified buffer in memory.
+        /// </summary>
+        /// <param name="span">The input slice of bytes.</param>
+        /// <param name="mode">The same flags as in imread</param>
+        /// <returns></returns>
+        public static Mat ImDecode(ReadOnlySpan<byte> span, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
+        {
+            return cv_api.ImDecode(span, mode);
+        }
+
+        /// <summary>
+        /// Creates the Mat instance from image data (using cv::decode) 
+        /// </summary>
+        /// <param name="imageBytes"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public static Mat FromImageData(byte[] imageBytes, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
+        {
+            return ImDecode(imageBytes, mode);
+        }
+
+        /// <summary>
+        /// Reads image from the specified buffer in memory.
+        /// </summary>
+        /// <param name="span">The input slice of bytes.</param>
+        /// <param name="mode">The same flags as in imread</param>
+        /// <returns></returns>
+        public static Mat FromImageData(ReadOnlySpan<byte> span, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
+        {
+            return cv_api.ImDecode(span, mode);
+        }
+
+        #endregion
+
+
     }
 }
