@@ -146,8 +146,11 @@ namespace SharpCV
             var p = ptr;
         }
 
-        public NDArray astype(Type type)
-            => data.astype(type);
+        public NDArray astype(TF_DataType dtype)
+            => data.astype(dtype);
+
+        public NDArray astype<T>()
+            => data.astype(typeof(T).as_tf_dtype());
 
         protected override void FreeHandle()
         {
