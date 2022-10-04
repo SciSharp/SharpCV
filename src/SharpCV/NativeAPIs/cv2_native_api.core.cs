@@ -59,5 +59,11 @@ namespace SharpCV
         internal static extern void core_split(IntPtr src, IntPtr mv);
         [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void core_vconcat2(IntPtr mat1, IntPtr mat2, IntPtr dst);
+
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void core_convertScaleAbs(IntPtr src, IntPtr dst, double alpha, double beta);
+
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void core_addWeighted(IntPtr src1, double alpha, IntPtr src2, double beta, double gamma, IntPtr dst, int dtype);
     }
 }

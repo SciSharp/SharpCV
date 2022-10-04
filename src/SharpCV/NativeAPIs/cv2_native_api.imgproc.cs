@@ -79,10 +79,16 @@ namespace SharpCV
         internal static extern void imgproc_medianBlur(IntPtr src, IntPtr dst, int kSize);
 
         [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void imgproc_GaussianBlur(IntPtr src, IntPtr dst, Size kSize,  double sigmaX, double sigmaY, BorderTypes borderType);
+
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void imgproc_filter2D(IntPtr src, IntPtr dst, MatType ddepth, IntPtr kernel, Point anchor,
             double delta, BorderTypes borderType);
 
         [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void imgproc_blur(IntPtr src, IntPtr dst, Size kSize, Point anchor, BorderTypes borderType);
+
+        [DllImport(OpenCvDllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void imgproc_Sobel(IntPtr src, IntPtr dst, MatType ddepth, int dx, int dy, int kSize, double scale, double delta, BorderTypes borderType);
     }
 }
