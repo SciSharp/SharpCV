@@ -7,7 +7,7 @@ namespace UnitTest
 {
     public abstract class Test
     {
-        public string datadir = Path.GetFullPath("../../../../../../data");
+        public string datadir = Path.GetFullPath("../../../../../data");
         protected string img3x5;
         protected string imgSolar;
         protected string mp4Road;
