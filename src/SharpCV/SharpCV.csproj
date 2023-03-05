@@ -43,7 +43,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TensorFlow.NET" Version="0.70.2" />
+    <ProjectReference Include="..\..\..\TensorFlow.NET\src\TensorFlowNET.Core\Tensorflow.Binding.csproj" />
   </ItemGroup>
 
 </Project>
