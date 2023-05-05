@@ -47,24 +47,6 @@ namespace UnitTest
             Assert.AreEqual(kernel[2], mat.data[2]);
         }
 
-        [TestMethod, Ignore("not supported yet")]
-        public void ndarray_jagged_array_int()
-        {
-            NDArray kernel = new int[][]
-            {
-                new int[]{ 0, -1, 0 },
-                new int[]{ -1, 5, -1 },
-                new int[]{ -2, -1, 3 }
-            };
-
-            var mat = new Mat(kernel);
-
-            Assert.AreEqual((3, 3), mat.shape);
-            Assert.AreEqual(kernel[0], mat.data[0]);
-            Assert.AreEqual(kernel[1], mat.data[1]);
-            Assert.AreEqual(kernel[2], mat.data[2]);
-        }
-
         [TestMethod]
         public void ndarray_mat_3x5()
         {

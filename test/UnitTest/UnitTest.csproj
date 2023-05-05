@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
     <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
     <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.4.0.20200915" />
-    <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.10.0" />
+    <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.11.3" />
   </ItemGroup>
 
   <ItemGroup>
