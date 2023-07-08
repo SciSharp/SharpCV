@@ -245,17 +245,6 @@ namespace SharpCV
         }
 
         /// <summary>
-        /// Reads image from the specified buffer in memory.
-        /// </summary>
-        /// <param name="span">The input slice of bytes.</param>
-        /// <param name="mode">The same flags as in imread</param>
-        /// <returns></returns>
-        public static Mat ImDecode(ReadOnlySpan<byte> span, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
-        {
-            return cv_api.ImDecode(span, mode);
-        }
-
-        /// <summary>
         /// Creates the Mat instance from image data (using cv::decode) 
         /// </summary>
         /// <param name="imageBytes"></param>
@@ -264,17 +253,6 @@ namespace SharpCV
         public static Mat FromImageData(byte[] imageBytes, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
         {
             return ImDecode(imageBytes, mode);
-        }
-
-        /// <summary>
-        /// Reads image from the specified buffer in memory.
-        /// </summary>
-        /// <param name="span">The input slice of bytes.</param>
-        /// <param name="mode">The same flags as in imread</param>
-        /// <returns></returns>
-        public static Mat FromImageData(ReadOnlySpan<byte> span, IMREAD_COLOR mode = IMREAD_COLOR.IMREAD_COLOR)
-        {
-            return cv_api.ImDecode(span, mode);
         }
 
         #endregion

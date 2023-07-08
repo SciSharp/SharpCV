@@ -31,9 +31,9 @@ namespace SharpCV
         /// <param name="span">The input slice of bytes.</param>
         /// <param name="flags">The same flags as in imread</param>
         /// <returns></returns>
-        public static Mat ImDecode(ReadOnlySpan<byte> span, IMREAD_COLOR flags = IMREAD_COLOR.IMREAD_COLOR)
+        public static Mat ImDecode(byte[] span, IMREAD_COLOR flags = IMREAD_COLOR.IMREAD_COLOR)
         {
-            if (span.IsEmpty)
+            if (span.Length == 0)
                 throw new ArgumentException("Empty span", nameof(span));
 
             unsafe
