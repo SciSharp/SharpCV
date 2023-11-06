@@ -6,7 +6,7 @@
     <AssemblyName>SharpCV</AssemblyName>
     <RootNamespace>SharpCV</RootNamespace>
     <PackageId>SharpCV</PackageId>
-    <Version>0.13.4</Version>
+    <Version>0.14.0</Version>
     <Authors>Haiping Chen</Authors>
     <Company>SciSharp STACK</Company>
     <Product>SharpCV</Product>
@@ -41,7 +41,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TensorFlow.NET" Version="0.110.4" />
+    <PackageReference Include="TensorFlow.NET" Version="0.150.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(SolutionName)==ModelsDebug Or $(SolutionName)==Debugging">
+    <ProjectReference Include="..\..\..\TensorFlow.NET\src\TensorFlowNET.Core\Tensorflow.Binding.csproj" />
   </ItemGroup>
 
 </Project>
