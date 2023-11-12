@@ -322,7 +322,20 @@ namespace SharpCV
             cv2_native_api.imgproc_medianBlur(src.InputArray, dst.OutputArray, kSize);
             return dst;
         }
-
+        public Mat GaussianBlur(Mat src,
+        Size kSize,
+       double sigmaX, double sigmaY,
+        BorderTypes borderType = BorderTypes.BORDER_DEFAULT)
+        {
+            var dst = new Mat();
+             
+            cv2_native_api.imgproc_GaussianBlur(src.InputArray,
+                dst.OutputArray,
+                kSize,
+              sigmaX, sigmaY,
+                borderType);
+            return dst;
+        }
         public Mat filter2D(Mat src, 
             MatType ddepth, 
             Mat kernel,
@@ -355,6 +368,21 @@ namespace SharpCV
                 dst.OutputArray,
                 kSize,
                 anchor.Value,
+                borderType);
+            return dst;
+        }
+
+        public Mat Sobel(Mat src, MatType ddepth,
+        int dx, int dy, int kSize,
+        double scale, double delta,
+          BorderTypes borderType = BorderTypes.BORDER_DEFAULT)
+        {
+            var dst = new Mat();
+
+            cv2_native_api.imgproc_Sobel(src.InputArray,
+                dst.OutputArray,
+                 ddepth,dx,dy,
+                kSize, scale, delta,
                 borderType);
             return dst;
         }
